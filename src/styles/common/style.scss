@@ -1,0 +1,146 @@
+@import 'src/styles/mixin/clearfix';
+@import 'src/styles/mixin/fontsize';
+@import 'src/styles/mixin/margin';
+@import 'src/styles/mixin/opacity';
+
+$FONT_COLOR: #6a6a6a;
+$FONT_MEIRIO: 'メイリオ','ＭＳ Ｐゴシック';
+$FONT_MIN: "ヒラギノ明朝 ProN W6","HiraMinProN-W6","HG明朝E","ＭＳ Ｐ明朝","MS PMincho","MS 明朝",serif;
+
+/* --HTML-- */
+html {
+color: $FONT_COLOR;
+overflow-y:scroll;
+}
+
+/* --BODY-- */
+body {
+	font:14px/1.7;
+	font-family: $FONT_MEIRIO;
+	margin:0;
+	overflow: hidden;
+	min-width: 1000px;
+	padding:0;
+	letter-spacing:1.2px;
+	-webkit-text-size-adjust: 100%;
+	box-sizing:border-box;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+}
+
+	/* for IE8 */
+	html>/**/body {
+	font-family: $FONT_MEIRIO;
+	font-size:75%;
+	}
+
+	/* for IE7 */
+	*+html body {
+	font-family: $FONT_MEIRIO;
+	font-size:75%;
+	}
+
+	/* for IE6 */
+	* html body {
+	font-family: $FONT_MEIRIO;
+	font-size:75%;
+	}
+
+img {
+	vertical-align:bottom;
+}
+
+/* --OTHER TAGS-- */
+a {
+overflow:hidden;
+outline:none;
+text-decoration:none;
+}
+
+a img, img {
+border:0;
+}
+
+a img {
+background: none;
+}
+
+a:hover img {
+	@include opacity(0.6);
+}
+
+/* clearfix */
+.clearfix {
+	@include clearfix;
+}
+
+
+/*-----------------------------------------
+  00:style
+------------------------------------------*/
+
+/*-----margin-----*/
+.mb10 {
+	@include marginBottom(10);
+}
+
+.mr0 {
+	@include marginRight(0);
+}
+
+/*---padding---*/
+.pt10 {
+	padding-top:10px;
+}
+
+/*-----float-----*/
+.fl_l {
+	float:left;
+}
+.fl_r {
+	float:right;
+}
+.cl_both {
+	clear:both;
+}
+
+/*-----font-----*/
+.fw_b {
+	font-weight:bold;
+}
+
+.ta_r {
+	text-align:right;
+}
+.ta_c {
+	text-align:center;
+}
+.ta_l {
+	text-align:left;
+}
+
+.fs10 {
+	@include fontSize(10);
+}
+.fs12 {
+	@include fontSize(12);
+}
+
+.f_min {
+	font-family: $FONT_MIN;
+}
+
+/*-----------------------------------------
+  01:wrapper
+------------------------------------------*/
+#wrapper {
+	width:100%;
+	overflow:hidden;
+	font-size:14px;
+	position:relative;
+  #pagetop {
+    position:fixed;
+  	right:20px;
+  	bottom:200px;
+  }
+}
