@@ -1,10 +1,14 @@
-<%
+<%_
+  var root = ''
   var pageId = 'top'
   var title = 'test'
   var description = 'top description'
-%>
-<% include ../include/_header %>
-  <div id="main">
-    <p>hello world</p>
-  </div>
-<% include ../include/_footer %>
+  var cssFile = []
+  var jsFile = []
+_%>
+<%_ include ../include/_header _%>
+      <div id="maincolumn">
+        <p>hello world</p>
+      </div>
+<%_ include ../include/_sidebar _%>
+<%_ include ../include/_footer _%>
