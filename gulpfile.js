@@ -19,7 +19,7 @@ gulp.task('browser-sync', function(){
 });
 
 gulp.task('sass', function() {
-  return gulp.src(['src/styles/**/*.scss', '!src/styles/mixin/*.scss'])
+  return gulp.src(['src/pc/styles/**/*.scss', '!src/pc/styles/mixin/*.scss'])
     .pipe(plumber({
       errorHandler: notify.onError('Error: <%= error.message %>')
     }))
@@ -32,14 +32,36 @@ gulp.task('sass', function() {
     .pipe(gulp.dest(destDir))
 });
 
+gulp.task('sass-sp', function() {
+  return gulp.src(['src/sp/styles/**/*.scss', '!src/sp/styles/mixin/*.scss'])
+    .pipe(plumber({
+      errorHandler: notify.onError('Error: <%= error.message %>')
+    }))
+    .pipe(sass( {
+      outputStyle: 'expanded'
+    }))
+		.pipe(rename(function (path) {
+			path.dirname = 'css'
+		}))
+    .pipe(gulp.dest(destDir + 'sp/'))
+});
+
+
 gulp.task('js', function() {
-  return gulp.src(['src/js/**/*.js'])
+  return gulp.src(['src/pc/js/**/*.js'])
     .pipe(changed('./dist/js/'))
     .pipe(gulp.dest('./dist/js/'))
 });
 
+gulp.task('js-sp', function() {
+  return gulp.src(['src/sp/js/**/*.js'])
+    .pipe(changed('./dist/sp/js/'))
+    .pipe(gulp.dest('./dist/sp/js/'))
+});
+
+
 gulp.task('ejs', function() {
-	return gulp.src(['src/templates/pages/**/*.ejs', '!src/templates/**/_*.ejs'])
+	return gulp.src(['src/pc/templates/pages/**/*.ejs', '!src/pc/templates/**/_*.ejs'])
 		.pipe(plumber({
 			errorHandler: notify.onError('Error: <%= error.message %>')
 		}))
@@ -48,18 +70,41 @@ gulp.task('ejs', function() {
 		.pipe(gulp.dest(destDir))
 })
 
+gulp.task('ejs-sp', function() {
+	return gulp.src(['src/sp/templates/pages/**/*.ejs', '!src/sp/templates/**/_*.ejs'])
+		.pipe(plumber({
+			errorHandler: notify.onError('Error: <%= error.message %>')
+		}))
+		.pipe(changed('./dist/sp/'))
+		.pipe(ejs({}, {ext: '.html'}))
+		.pipe(gulp.dest(destDir + 'sp/'))
+})
+
+
 gulp.task('bs-reload', function(){
 	browserSync.reload();
 });
 
 gulp.task('default', ['browser-sync', 'sass', 'js', 'ejs'], function() {
-  watch(['src/styles/**/*.scss'], function() {
+  watch(['src/pc/styles/**/*.scss'], function() {
     gulp.start(['sass','bs-reload']);
   });
-  watch(['src/js/**/*.js'], function() {
+  watch(['src/pc/js/**/*.js'], function() {
     gulp.start(['js', 'bs-reload']);
   });
-  watch(['src/**/*.ejs'], function() {
+  watch(['src/pc/**/*.ejs'], function() {
     gulp.start(['ejs', 'bs-reload']);
+  });
+});
+
+gulp.task('sp', ['browser-sync', 'sass-sp', 'js-sp', 'ejs-sp'], function() {
+  watch(['src/sp/styles/**/*.scss'], function() {
+    gulp.start(['sass-sp','bs-reload']);
+  });
+  watch(['src/sp/js/**/*.js'], function() {
+    gulp.start(['js-sp', 'bs-reload']);
+  });
+  watch(['src/sp/**/*.ejs'], function() {
+    gulp.start(['ejs-sp', 'bs-reload']);
   });
 });

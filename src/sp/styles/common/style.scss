@@ -1,7 +1,7 @@
-@import 'src/styles/mixin/clearfix';
-@import 'src/styles/mixin/fontsize';
-@import 'src/styles/mixin/margin';
-@import 'src/styles/mixin/opacity';
+@import '../mixin/clearfix';
+@import '../mixin/fontsize';
+@import '../mixin/margin';
+@import '../mixin/opacity';
 
 $FONT_COLOR: #6a6a6a;
 $FONT_MEIRIO: 'メイリオ','ＭＳ Ｐゴシック';
@@ -19,7 +19,6 @@ body {
 	font-family: $FONT_MEIRIO;
 	margin:0;
 	overflow: hidden;
-	min-width: 1000px;
 	padding:0;
 	letter-spacing:1.2px;
 	-webkit-text-size-adjust: 100%;
@@ -123,8 +122,8 @@ $value: 80;
 	font-family: $FONT_MIN;
 }
 
-$value: 20;
-@while $value > 10 {
+$value: 14;
+@while $value > 0 {
 	.fs#{$value} {
 		@include fontSize($value);
 	}
