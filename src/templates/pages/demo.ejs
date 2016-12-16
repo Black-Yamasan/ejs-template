@@ -1,0 +1,82 @@
+<%_
+  var root = ''
+  var pageId = 'demo'
+  var title = 'demo page'
+  var description = 'this is ejs_template demo'
+  var cssFile = ['demo']
+  var jsFile = []
+
+  <!-- ###### 以下demo用 ###### -->
+
+  <!-- １：変数 -->
+  var msg = 'Hello'
+
+  <!-- ２：条件分岐 -->
+  var num;
+  var text = 'text';
+  num = 1;
+  if ( num == 0 ) {
+    text = 'ゼロ';
+  } else if ( num == 1 ) {
+    text = 'いち'
+  } else {
+    text = 'その他';
+  }
+
+  <!-- ４：ループその2・・・json形式 -->
+  var list = [
+    {
+      no: 1,
+      title: 'title1',
+      text: 'text1'
+    },
+    {
+      no: 2,
+      title: 'title2',
+      text: 'text2'
+    },
+    {
+      no: 3,
+      title: 'title3',
+      text: 'text3'
+    }
+  ];
+_%>
+<%_ include ../include/_header _%>
+      <div id="maincolumn">
+        <section class="box">
+          <h3 class="box_tit">1：変数</h3>
+          <p><%= msg %></p>
+        </section>
+        <section class="box">
+          <h3 class="box_tit">2：条件分岐</h3>
+          <p class="mb10"><%= num %>が選択されました。</p>
+          <p><%= text %></p>
+        </section>
+        <section class="box">
+          <h3 class="box_tit">3：ループ</h3>
+          <p class="mb10">単純な配列</p>
+          <select>
+            <%_ var choice = ['選択肢１', '選択肢2', '選択肢3'];
+                for ( key in choice ) {
+            _%>
+            <option value="<%= key %>"><%= choice[key] %></option>
+            <%_ } _%>
+          </select>
+        </section>
+        <section class="box">
+          <h3 class="box_tit">4：ループその２</h3>
+          <p class="mb10">json形式</p>
+          <ul>
+            <%_ for ( var i = 0; i < list.length; i++ ) { _%>
+            <li>
+              <p class="fs11"><%= list[i].no %></p>
+              <p class="fs16 mb5 fw_b"><%= list[i].title %></p>
+              <p><%= list[i].text %></p>
+            </li>
+            <%_ } _%>
+          </ul>
+        </section>
+      </div>
+<%_ include ../include/_sidebar _%>
+<%_ include ../include/_footer _%>
