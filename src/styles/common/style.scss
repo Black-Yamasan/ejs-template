@@ -81,7 +81,7 @@ a:hover img {
 
 /*-----margin-----*/
 $value: 80;
-@while $value > 10 {
+@while $value > 0 {
 	.mb#{$value} {
 		@include marginBottom($value);
 	}
