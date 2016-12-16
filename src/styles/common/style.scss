@@ -80,18 +80,18 @@ a:hover img {
 ------------------------------------------*/
 
 /*-----margin-----*/
-.mb10 {
-	@include marginBottom(10);
+$value: 80;
+@while $value > 10 {
+	.mb#{$value} {
+		@include marginBottom($value);
+	}
+	$value: $value - 5;
 }
 
 .mr0 {
 	@include marginRight(0);
 }
 
-/*---padding---*/
-.pt10 {
-	padding-top:10px;
-}
 
 /*-----float-----*/
 .fl_l {
@@ -119,15 +119,16 @@ a:hover img {
 	text-align:left;
 }
 
-.fs10 {
-	@include fontSize(10);
-}
-.fs12 {
-	@include fontSize(12);
-}
-
 .f_min {
 	font-family: $FONT_MIN;
+}
+
+$value: 20;
+@while $value > 10 {
+	.fs#{$value} {
+		@include fontSize($value);
+	}
+	$value: $value - 1;
 }
 
 /*-----------------------------------------
