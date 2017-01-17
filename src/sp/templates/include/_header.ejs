@@ -12,14 +12,14 @@
 <link href="<%= root %>css/reset.css" rel="stylesheet">
 <link href="<%= root %>css/style.css" rel="stylesheet">
 <%_ for ( var i = 0; i < cssFile.length; i++ ) { _%>
-<link href="<%= root %>css/<%= cssFile %>.css" rel="stylesheet">
+<link href="<%= root %>css/<%= cssFile[i] %>.css" rel="stylesheet">
 <%_ } _%>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript" src="<%= root %>js/libs/prefixfree.min.js"></script>
 <script type="text/javascript" src="<%= root %>js/libs/modernizr-2.7.1.dev.js"></script>
 <script type="text/javascript" src="<%= root %>js/functions.js"></script>
 <%_ for ( var i = 0; i < jsFile.length; i++ ) { _%>
-<script type="text/javascript" src="<%= root %>js/<%= jsFile %>.js"></script>
+<script type="text/javascript" src="<%= root %>js/<%= jsFile[i] %>.js"></script>
 <%_ } _%>
 </head>
 
