@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+var coffee = require('gulp-coffee');
 var ejs = require('gulp-ejs');
 var watch = require('gulp-watch');
 var plumber = require('gulp-plumber');
@@ -59,6 +60,24 @@ gulp.task('js-sp', function() {
     .pipe(gulp.dest('./dist/sp/js/'))
 });
 
+gulp.task('coffee', function() {
+	return gulp.src(['src/pc/js/**/*.coffee'])
+		.pipe(plumber({
+			errorHandler: notify.onError('Error: <%= error.message %>')
+		}))
+		.pipe(coffee())
+		.pipe(gulp.dest('./dist/js'))
+});
+
+gulp.task('coffee-sp', function() {
+	return gulp.src(['src/sp/js/**/*.coffee'])
+		.pipe(plumber({
+			errorHandler: notify.onError('Error: <%= error.message %>')
+		}))
+		.pipe(coffee())
+		.pipe(gulp.dest('./dist/sp/js'))
+})
+
 
 gulp.task('ejs', function() {
 	return gulp.src(['src/pc/templates/pages/**/*.ejs', '!src/pc/templates/**/_*.ejs'])
@@ -85,24 +104,30 @@ gulp.task('bs-reload', function(){
 	browserSync.reload();
 });
 
-gulp.task('default', ['browser-sync', 'sass', 'js', 'ejs'], function() {
+gulp.task('default', ['browser-sync', 'sass', 'js', 'coffee', 'ejs'], function() {
   watch(['src/pc/styles/**/*.scss'], function() {
     gulp.start(['sass','bs-reload']);
   });
   watch(['src/pc/js/**/*.js'], function() {
     gulp.start(['js', 'bs-reload']);
   });
+	watch(['src/pc/js/**/*.coffee'], function() {
+    gulp.start(['coffee', 'bs-reload']);
+  });
   watch(['src/pc/**/*.ejs'], function() {
     gulp.start(['ejs', 'bs-reload']);
   });
 });
 
-gulp.task('sp', ['browser-sync', 'sass-sp', 'js-sp', 'ejs-sp'], function() {
+gulp.task('sp', ['browser-sync', 'sass-sp', 'js-sp', 'coffee-sp', 'ejs-sp'], function() {
   watch(['src/sp/styles/**/*.scss'], function() {
     gulp.start(['sass-sp','bs-reload']);
   });
   watch(['src/sp/js/**/*.js'], function() {
     gulp.start(['js-sp', 'bs-reload']);
+  });
+	watch(['src/sp/js/**/*.coffee'], function() {
+    gulp.start(['coffee-sp', 'bs-reload']);
   });
   watch(['src/sp/**/*.ejs'], function() {
     gulp.start(['ejs-sp', 'bs-reload']);
