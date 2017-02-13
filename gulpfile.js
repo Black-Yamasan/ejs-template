@@ -99,12 +99,24 @@ gulp.task('ejs-sp', function() {
 		.pipe(gulp.dest(destDir + 'sp/'))
 })
 
+gulp.task('images', function() {
+	return gulp.src(['src/pc/images/**/'])
+	.pipe(changed('./dist/images/'))
+	.pipe(gulp.dest('./dist/images/'))
+});
+
+gulp.task('images-sp', function() {
+	return gulp.src(['src/sp/images/**/'])
+	.pipe(changed('./dist/sp/images/'))
+	.pipe(gulp.dest('./dist/sp/images/'))
+});
+
 
 gulp.task('bs-reload', function(){
 	browserSync.reload();
 });
 
-gulp.task('default', ['browser-sync', 'sass', 'js', 'coffee', 'ejs'], function() {
+gulp.task('default', ['browser-sync', 'sass', 'js', 'coffee', 'ejs', 'images'], function() {
   watch(['src/pc/styles/**/*.scss'], function() {
     gulp.start(['sass','bs-reload']);
   });
@@ -117,9 +129,12 @@ gulp.task('default', ['browser-sync', 'sass', 'js', 'coffee', 'ejs'], function()
   watch(['src/pc/**/*.ejs'], function() {
     gulp.start(['ejs', 'bs-reload']);
   });
+	watch(['src/pc/images/**/*'], function() {
+    gulp.start(['images', 'bs-reload']);
+  });
 });
 
-gulp.task('sp', ['browser-sync', 'sass-sp', 'js-sp', 'coffee-sp', 'ejs-sp'], function() {
+gulp.task('sp', ['browser-sync', 'sass-sp', 'js-sp', 'coffee-sp', 'ejs-sp', 'images-sp'], function() {
   watch(['src/sp/styles/**/*.scss'], function() {
     gulp.start(['sass-sp','bs-reload']);
   });
@@ -131,5 +146,8 @@ gulp.task('sp', ['browser-sync', 'sass-sp', 'js-sp', 'coffee-sp', 'ejs-sp'], fun
   });
   watch(['src/sp/**/*.ejs'], function() {
     gulp.start(['ejs-sp', 'bs-reload']);
+  });
+	watch(['src/sp/images/**/*'], function() {
+    gulp.start(['images-sp', 'bs-reload']);
   });
 });
