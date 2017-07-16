@@ -5,8 +5,13 @@
   "main": "index.js",
   "dependencies": {
     "browser-sync": "^2.16.0",
+    "del": "^3.0.0",
     "gulp": "^3.9.1",
-    "gulp-watch": "^4.3.10"
+    "gulp-clean-css": "^3.7.0",
+    "gulp-if": "^2.0.2",
+    "gulp-watch": "^4.3.10",
+    "minimist": "^1.2.0",
+    "uglify": "^0.1.5"
   },
   "devDependencies": {
     "browser-sync": "^2.16.0",
