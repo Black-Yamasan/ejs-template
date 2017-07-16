@@ -2,14 +2,27 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var coffee = require('gulp-coffee');
 var ejs = require('gulp-ejs');
+var uglify = require('gulp-uglify');
+var cleanCss = require('gulp-clean-css');
 var watch = require('gulp-watch');
 var plumber = require('gulp-plumber');
 var notify = require('gulp-notify');
 var cache = require('gulp-cached');
 var changed = require('gulp-changed');
 var rename = require('gulp-rename');
+var gulpif = require('gulp-if');
+var minimist = require('minimist');
+var del = require('del');
 var browserSync = require('browser-sync').create();
 var destDir = './dist/';
+var prodDir = './htdocs/';
+var options = minimist(process.argv.slice(2), config);
+var config = {
+	string: 'env',
+	default: { env: process.env.NODE_ENV || 'dev'}
+}
+var isProd = (options.env === 'prod') ? true : false;
+console.log('[build env]', options.env, '[isProd]', isProd);
 
 gulp.task('browser-sync', function(){
 	browserSync.init({
@@ -30,7 +43,9 @@ gulp.task('sass', function() {
 		.pipe(rename(function (path) {
 			path.dirname = 'css'
 		}))
-    .pipe(gulp.dest(destDir))
+		.pipe(gulpif(isProd, cleanCss()))
+    .pipe(gulpif(!isProd, gulp.dest(destDir)))
+		.pipe(gulpif(isProd, gulp.dest(prodDir)))
 });
 
 gulp.task('sass-sp', function() {
@@ -44,20 +59,36 @@ gulp.task('sass-sp', function() {
 		.pipe(rename(function (path) {
 			path.dirname = 'css'
 		}))
-    .pipe(gulp.dest(destDir + 'sp/'))
+		.pipe(gulpif(isProd, cleanCss()))
+    .pipe(gulpif(!isProd, gulp.dest(destDir + 'sp/')))
+		.pipe(gulpif(isProd, gulp.dest(prodDir + 'sp/')))
 });
 
 
 gulp.task('js', function() {
   return gulp.src(['src/pc/js/**/*.js'])
-    .pipe(changed('./dist/js/'))
-    .pipe(gulp.dest('./dist/js/'))
+		.pipe(gulpif(!isProd, changed(destDir + 'js/')))
+		.pipe(gulpif(isProd, changed(prodDir + 'js/')))
+		.pipe(gulpif(isProd, uglify({
+        output:{
+          comments: /^\/* /
+        }
+      })))
+		.pipe(gulpif(!isProd, gulp.dest(destDir)))
+		.pipe(gulpif(isProd, gulp.dest(prodDir + 'js/')))
 });
 
 gulp.task('js-sp', function() {
   return gulp.src(['src/sp/js/**/*.js'])
-    .pipe(changed('./dist/sp/js/'))
-    .pipe(gulp.dest('./dist/sp/js/'))
+		.pipe(gulpif(!isProd, changed(destDir + 'sp/js/')))
+		.pipe(gulpif(isProd, changed(prodDir + 'sp/js/')))
+		.pipe(gulpif(isProd, uglify({
+        output:{
+          comments: /^\/* /
+        }
+      })))
+		.pipe(gulpif(!isProd, gulp.dest(destDir + 'sp/')))
+		.pipe(gulpif(isProd, gulp.dest(prodDir + 'sp/js/')))
 });
 
 gulp.task('coffee', function() {
@@ -66,7 +97,11 @@ gulp.task('coffee', function() {
 			errorHandler: notify.onError('Error: <%= error.message %>')
 		}))
 		.pipe(coffee())
-		.pipe(gulp.dest('./dist/js'))
+		.pipe(gulpif(!isProd, changed(destDir + 'js/')))
+		.pipe(gulpif(isProd, changed(prodDir + 'js/')))
+		.pipe(gulpif(isProd, uglify()))
+		.pipe(gulpif(!isProd, gulp.dest(destDir)))
+		.pipe(gulpif(isProd, gulp.dest(prodDir + 'js/')))
 });
 
 gulp.task('coffee-sp', function() {
@@ -75,7 +110,11 @@ gulp.task('coffee-sp', function() {
 			errorHandler: notify.onError('Error: <%= error.message %>')
 		}))
 		.pipe(coffee())
-		.pipe(gulp.dest('./dist/sp/js'))
+		.pipe(gulpif(!isProd, changed(destDir + 'sp/js/')))
+		.pipe(gulpif(isProd, changed(prodDir + 'sp/js/')))
+		.pipe(gulpif(isProd, uglify()))
+		.pipe(gulpif(!isProd, gulp.dest(destDir + 'sp/')))
+		.pipe(gulpif(isProd, gulp.dest(prodDir + 'sp/js/')))
 })
 
 
@@ -86,7 +125,8 @@ gulp.task('ejs', function() {
 		}))
 		.pipe(changed('./dist/'))
 		.pipe(ejs({}, {ext: '.html'}))
-		.pipe(gulp.dest(destDir))
+		.pipe(gulpif(!isProd, gulp.dest(destDir)))
+		.pipe(gulpif(isProd, gulp.dest(prodDir)))
 })
 
 gulp.task('ejs-sp', function() {
@@ -96,24 +136,32 @@ gulp.task('ejs-sp', function() {
 		}))
 		.pipe(changed('./dist/sp/'))
 		.pipe(ejs({}, {ext: '.html'}))
-		.pipe(gulp.dest(destDir + 'sp/'))
+		.pipe(gulpif(!isProd, gulp.dest(destDir + 'sp/')))
+		.pipe(gulpif(isProd, gulp.dest(prodDir + 'sp/')))
 })
 
 gulp.task('images', function() {
 	return gulp.src(['src/pc/images/**/'])
-	.pipe(changed('./dist/images/'))
-	.pipe(gulp.dest('./dist/images/'))
+	.pipe(changed(destDir + 'images/'))
+	.pipe(gulpif(!isProd, gulp.dest(destDir + 'images/')))
+	.pipe(gulpif(isProd, gulp.dest(prodDir + 'images/')))
 });
 
 gulp.task('images-sp', function() {
 	return gulp.src(['src/sp/images/**/'])
-	.pipe(changed('./dist/sp/images/'))
-	.pipe(gulp.dest('./dist/sp/images/'))
+	.pipe(changed(destDir + 'sp/images/'))
+	.pipe(gulpif(!isProd, gulp.dest(destDir + 'sp/images/')))
+	.pipe(gulpif(isProd, gulp.dest(prodDir + 'sp/images/')))
 });
 
 
 gulp.task('bs-reload', function(){
 	browserSync.reload();
+});
+
+gulp.task('clean', del.bind(null, prodDir));
+
+gulp.task('build', ['sass', 'js', 'coffee', 'ejs', 'images', 'sass-sp', 'js-sp', 'coffee-sp', 'ejs-sp', 'images-sp'], function() {
 });
 
 gulp.task('default', ['browser-sync', 'sass', 'js', 'coffee', 'ejs', 'images'], function() {
@@ -133,6 +181,7 @@ gulp.task('default', ['browser-sync', 'sass', 'js', 'coffee', 'ejs', 'images'], 
     gulp.start(['images', 'bs-reload']);
   });
 });
+
 
 gulp.task('sp', ['browser-sync', 'sass-sp', 'js-sp', 'coffee-sp', 'ejs-sp', 'images-sp'], function() {
   watch(['src/sp/styles/**/*.scss'], function() {
