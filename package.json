@@ -29,6 +29,8 @@
     "lodash": "^4.17.2"
   },
   "scripts": {
+    "dev": "gulp",
+    "prod": "gulp --env prod",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -41,8 +43,8 @@
     "--save-dev",
     "gulp-plumber"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "Black-Yamasan",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Black-Yamasan/ejs-template/issues"
   },
