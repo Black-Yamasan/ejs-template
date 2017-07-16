@@ -3,3 +3,4 @@ node_modules
 dist/*
 htdocs/*
 yarn.lock
+npm-debug.log
