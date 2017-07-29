@@ -30,8 +30,8 @@
     "lodash": "^4.17.2"
   },
   "scripts": {
-    "dev": "gulp",
-    "prod": "gulp --env prod",
+    "dev": "gulp build --env dev",
+    "prod": "gulp build --env prod",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

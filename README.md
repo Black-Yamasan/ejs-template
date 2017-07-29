@@ -30,6 +30,8 @@ CoffeeScriptの自動コンパイル追加
 ### ver 5.0.0
 開発環境用と本番環境用にファイルを分けるタスクを追加
 
+### ver 5.0.1
+コマンド変更
 
 ### 使い方と仕様
 
@@ -37,11 +39,11 @@ CoffeeScriptの自動コンパイル追加
 #### ＜使い方＞
   1. nodeをインストール
   2. 作業ディレクトリに移動し、コマンド「npm install」で必要なパッケージをインストール
-  3. 開発用ソースのビルド「gulp build」
+  3. 開発用ソースのビルド「gulp build --env dev」
   4. コマンド「gulp」でローカルサーバー起動（/sp以下を監視する場合は gulp-sp）
   5. 開発が終わったら本番環境用にソースをビルド
   - htdocs/を一旦空にする「gulp clean」
-  - 本番環境用のソースをビルド「gulp build --env prod」
+  - 本番環境用のソースをビルド「gulp build --env prod」  
   ＊ htdocs/以下にminifyしたcssやjsが入ります。
 
 #### ＜仕様＞

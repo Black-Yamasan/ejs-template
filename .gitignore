@@ -4,3 +4,5 @@ dist/*
 htdocs/*
 yarn.lock
 npm-debug.log
+src/pc/images/*
+src/sp/images/*
