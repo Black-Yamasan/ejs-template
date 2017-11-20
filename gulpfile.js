@@ -74,7 +74,7 @@ gulp.task('js', function() {
           comments: /^\/* /
         }
       })))
-		.pipe(gulpif(!isProd, gulp.dest(destDir)))
+		.pipe(gulpif(!isProd, gulp.dest(destDir + 'js/')))
 		.pipe(gulpif(isProd, gulp.dest(prodDir + 'js/')))
 });
 
@@ -87,7 +87,7 @@ gulp.task('js-sp', function() {
           comments: /^\/* /
         }
       })))
-		.pipe(gulpif(!isProd, gulp.dest(destDir + 'sp/')))
+		.pipe(gulpif(!isProd, gulp.dest(destDir + 'sp/js/')))
 		.pipe(gulpif(isProd, gulp.dest(prodDir + 'sp/js/')))
 });
 
@@ -100,7 +100,7 @@ gulp.task('coffee', function() {
 		.pipe(gulpif(!isProd, changed(destDir + 'js/')))
 		.pipe(gulpif(isProd, changed(prodDir + 'js/')))
 		.pipe(gulpif(isProd, uglify()))
-		.pipe(gulpif(!isProd, gulp.dest(destDir)))
+		.pipe(gulpif(!isProd, gulp.dest(destDir + 'js/')))
 		.pipe(gulpif(isProd, gulp.dest(prodDir + 'js/')))
 });
 
@@ -113,7 +113,7 @@ gulp.task('coffee-sp', function() {
 		.pipe(gulpif(!isProd, changed(destDir + 'sp/js/')))
 		.pipe(gulpif(isProd, changed(prodDir + 'sp/js/')))
 		.pipe(gulpif(isProd, uglify()))
-		.pipe(gulpif(!isProd, gulp.dest(destDir + 'sp/')))
+		.pipe(gulpif(!isProd, gulp.dest(destDir + 'sp/js/')))
 		.pipe(gulpif(isProd, gulp.dest(prodDir + 'sp/js/')))
 })
 
