@@ -200,7 +200,7 @@ gulp.task('default', ['browser-sync', 'sass', 'js', 'coffee', 'ejs', 'images'], 
 });
 
 
-gulp.task('default', ['browser-sync', 'sass-sp', 'js-sp', 'coffee-sp', 'ejs-sp', 'images-sp'], function() {
+gulp.task('sp', ['browser-sync', 'sass-sp', 'js-sp', 'coffee-sp', 'ejs-sp', 'images-sp'], function() {
 	watch(['src/sp/styles/**/*.scss'], function() {
 		return runSequence(
 			'sass-sp',
