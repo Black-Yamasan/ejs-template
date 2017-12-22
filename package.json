@@ -12,6 +12,7 @@
     "gulp-uglify": "^3.0.0",
     "gulp-watch": "^4.3.10",
     "minimist": "^1.2.0",
+    "run-sequence": "^2.2.0",
     "uglify": "^0.1.5"
   },
   "devDependencies": {
