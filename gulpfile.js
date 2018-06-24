@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var coffee = require('gulp-coffee');
 var ejs = require('gulp-ejs');
+var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var cleanCss = require('gulp-clean-css');
 var watch = require('gulp-watch');
@@ -92,6 +93,23 @@ gulp.task('js-sp', function() {
 		.pipe(gulpif(isProd, gulp.dest(prodDir + 'sp/js/')))
 });
 
+
+gulp.task('js-concat', function() {
+	console.log('!!');
+	return gulp.src(['src/common/js/plugins/*.js'])
+		.pipe(concat('plugins.js'))
+		.pipe(gulpif(!isProd, changed(destDir + 'js/libs/')))
+		.pipe(gulpif(isProd, changed(prodDir + 'js/libs/')))
+		.pipe(gulpif(isProd, uglify({
+        output:{
+          comments: /^\/* /
+        }
+      })))
+		.pipe(gulpif(!isProd, gulp.dest(destDir + 'js/libs/')))
+		.pipe(gulpif(isProd, gulp.dest(prodDir + 'js/libs/')))
+});
+
+
 gulp.task('coffee', function() {
 	return gulp.src(['src/pc/js/**/*.coffee'])
 		.pipe(plumber({
@@ -162,11 +180,11 @@ gulp.task('bs-reload', function(){
 
 gulp.task('clean', del.bind(null, prodDir));
 
-gulp.task('build', ['sass', 'js', 'coffee', 'ejs', 'images', 'sass-sp', 'js-sp', 'coffee-sp', 'ejs-sp', 'images-sp'], function() {
+gulp.task('build', ['sass', 'js', 'js-concat', 'coffee', 'ejs', 'images', 'sass-sp', 'js-sp', 'coffee-sp', 'ejs-sp', 'images-sp'], function() {
 });
 
 
-gulp.task('default', ['browser-sync', 'sass', 'js', 'coffee', 'ejs', 'images'], function() {
+gulp.task('default', ['browser-sync', 'sass', 'js', 'js-concat',  'coffee', 'ejs', 'images'], function() {
 	watch(['src/pc/styles/**/*.scss'], function() {
 		return runSequence(
 			'sass',
@@ -176,6 +194,12 @@ gulp.task('default', ['browser-sync', 'sass', 'js', 'coffee', 'ejs', 'images'], 
 	watch(['src/pc/js/**/*.js'], function() {
 		return runSequence(
 			'js',
+			'bs-reload'
+		)
+	});
+	watch(['src/common/js/plugins/*.js'], function() {
+		return runSequence(
+			'js-concat',
 			'bs-reload'
 		)
 	});
@@ -200,7 +224,7 @@ gulp.task('default', ['browser-sync', 'sass', 'js', 'coffee', 'ejs', 'images'], 
 });
 
 
-gulp.task('sp', ['browser-sync', 'sass-sp', 'js-sp', 'coffee-sp', 'ejs-sp', 'images-sp'], function() {
+gulp.task('sp', ['browser-sync', 'sass-sp', 'js-sp', 'js-concat', 'coffee-sp', 'ejs-sp', 'images-sp'], function() {
 	watch(['src/sp/styles/**/*.scss'], function() {
 		return runSequence(
 			'sass-sp',
@@ -210,6 +234,12 @@ gulp.task('sp', ['browser-sync', 'sass-sp', 'js-sp', 'coffee-sp', 'ejs-sp', 'ima
 	watch(['src/sp/js/**/*.js'], function() {
 		return runSequence(
 			'js-sp',
+			'bs-reload'
+		)
+	});
+	watch(['src/common/js/plugins/*.js'], function() {
+		return runSequence(
+			'js-concat',
 			'bs-reload'
 		)
 	});
