@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer');
 var coffee = require('gulp-coffee');
 var ejs = require('gulp-ejs');
 var concat = require('gulp-concat');
@@ -45,6 +46,10 @@ gulp.task('sass', function() {
 		.pipe(rename(function (path) {
 			path.dirname = 'css'
 		}))
+		.pipe(autoprefixer({
+            browsers: ['last 2 version', 'iOS >= 9', 'Android >= 4.6'],
+            cascade: false
+    }))
 		.pipe(gulpif(isProd, cleanCss()))
     .pipe(gulpif(!isProd, gulp.dest(destDir)))
 		.pipe(gulpif(isProd, gulp.dest(prodDir)))
@@ -61,6 +66,10 @@ gulp.task('sass-sp', function() {
 		.pipe(rename(function (path) {
 			path.dirname = 'css'
 		}))
+		.pipe(autoprefixer({
+            browsers: ['last 2 version', 'iOS >= 9', 'Android >= 4.6'],
+            cascade: false
+    }))
 		.pipe(gulpif(isProd, cleanCss()))
     .pipe(gulpif(!isProd, gulp.dest(destDir + 'sp/')))
 		.pipe(gulpif(isProd, gulp.dest(prodDir + 'sp/')))
