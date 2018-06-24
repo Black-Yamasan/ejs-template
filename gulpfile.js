@@ -35,7 +35,7 @@ gulp.task('browser-sync', function(){
 });
 
 gulp.task('sass', function() {
-  return gulp.src(['src/pc/styles/**/*.scss', '!src/pc/styles/mixin/*.scss'])
+  return gulp.src(['src/pc/styles/**/*.scss'])
     .pipe(plumber({
       errorHandler: notify.onError('Error: <%= error.message %>')
     }))
@@ -51,7 +51,7 @@ gulp.task('sass', function() {
 });
 
 gulp.task('sass-sp', function() {
-  return gulp.src(['src/sp/styles/**/*.scss', '!src/sp/styles/mixin/*.scss'])
+  return gulp.src(['src/sp/styles/**/*.scss'])
     .pipe(plumber({
       errorHandler: notify.onError('Error: <%= error.message %>')
     }))
@@ -95,7 +95,6 @@ gulp.task('js-sp', function() {
 
 
 gulp.task('js-concat', function() {
-	console.log('!!');
 	return gulp.src(['src/common/js/plugins/*.js'])
 		.pipe(concat('plugins.js'))
 		.pipe(gulpif(!isProd, changed(destDir + 'js/libs/')))

@@ -1,43 +1,12 @@
-@import '../mixin/fontsize';
-@import '../mixin/margin';
+@import '../config.scss';
 
-.demo {
+@import '../../../common/styles/mixin/clearfix';
+@import '../../../common/styles/mixin/fontsize';
+@import '../../../common/styles/mixin/margin';
+@import '../../../common/styles/mixin/opacity';
 
-  header {
-    margin-bottom: 30px;
-  }
+@import '../components/header';
+@import '../components/footer';
 
-  #container {
-    width: calc(100% - 30px);
-    margin: 0 auto 50px auto;
-    overflow: hidden;
-  }
-
-  #maincolumn {
-    width: 100%;
-  }
-
-  .box {
-    @include marginBottom(30);
-    padding-bottom: 30px;
-    border-bottom: 1px solid #ccc;
-    &_tit {
-      @include fontSize(12);
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
-
-    li {
-      margin-bottom: 10px;
-    }
-
-    select {
-      width: 150px;
-      height: 22px;
-      border-radius: 0;
-      font-size: 12px;
-    }
-  }
-
-
-}
+@import '../layout/l-common';
+@import '../layout/l-demo';
