@@ -1,46 +1,17 @@
-.demo {
+@import '../config.scss';
 
-  header {
-    margin-bottom: 30px;
-  }
+@import '../../../common/styles/mixin/clearfix';
+@import '../../../common/styles/mixin/fontsize';
+@import '../../../common/styles/mixin/margin';
+@import '../../../common/styles/mixin/opacity';
+@import '../../../common/styles/mixin/hideaway';
+@import '../../../common/styles/mixin/transform';
 
-  #container {
-    width: 900px;
-    margin: 0 auto 50px auto;
-    overflow: hidden;
-  }
+@import '../../../common/styles/common/reset';
 
-  #maincolumn {
-    width: 680px;
-    float: left;
-  }
+@import '../components/header';
+@import '../components/footer';
+@import '../components/sidebar';
 
-  #sidebar {
-    width: 150px;
-    float: right;
-  }
-
-  .box {
-    margin-bottom: 30px;
-    padding-bottom: 30px;
-    border-bottom: 1px solid #ccc;
-    &_tit {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
-
-    li {
-      margin-bottom: 10px;
-    }
-
-    select {
-      width: 150px;
-      height: 22px;
-      border-radius: 0;
-      font-size: 12px;
-    }
-  }
-
-
-}
+@import '../layout/l-common';
+@import '../layout/l-demo';

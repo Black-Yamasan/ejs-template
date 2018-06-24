@@ -9,16 +9,14 @@
 <meta content="" name="keywords">
 <meta name="format-detection" content="telephone=no">
 <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE">
-<link href="<%= root %>css/reset.css" rel="stylesheet">
-<link href="<%= root %>css/style.css" rel="stylesheet">
 <%_ for ( var i = 0; i < cssFile.length; i++ ) { _%>
 <link href="<%= root %>css/<%= cssFile[i] %>.css" rel="stylesheet">
 <%_ } _%>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="<%= root %>js/functions.js"></script>
+<script type="text/javascript" src="<%= root %>js/libs/plugins.js"></script>
 </head>
 
-<body class="<%= pageId %>">
+<body class="page-<%= pageId %>">
   <div id="wrapper">
     <%_ include ../layout/_header _%>
-    <div id="container">
+    <div id="container" class="container">
