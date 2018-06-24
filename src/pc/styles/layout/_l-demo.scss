@@ -1,5 +1,5 @@
 .page-demo {
-  
+
   .box {
     margin-bottom: 30px;
     padding-bottom: 30px;
@@ -19,6 +19,7 @@
       height: 22px;
       border-radius: 0;
       font-size: 12px;
+      @include translate(-15px, -40px);
     }
   }
 }
