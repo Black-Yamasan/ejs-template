@@ -150,8 +150,8 @@ gulp.task('ejs', function() {
 		.pipe(plumber({
 			errorHandler: notify.onError('Error: <%= error.message %>')
 		}))
+		.pipe(ejs({}, {}, {ext: '.html'}))
 		.pipe(changed('./dist/'))
-		.pipe(ejs({}, {ext: '.html'}))
 		.pipe(gulpif(!isProd, gulp.dest(destDir)))
 		.pipe(gulpif(isProd, gulp.dest(prodDir)))
 })
@@ -161,8 +161,8 @@ gulp.task('ejs-sp', function() {
 		.pipe(plumber({
 			errorHandler: notify.onError('Error: <%= error.message %>')
 		}))
+		.pipe(ejs({}, {}, {ext: '.html'}))
 		.pipe(changed('./dist/sp/'))
-		.pipe(ejs({}, {ext: '.html'}))
 		.pipe(gulpif(!isProd, gulp.dest(destDir + 'sp/')))
 		.pipe(gulpif(isProd, gulp.dest(prodDir + 'sp/')))
 })
