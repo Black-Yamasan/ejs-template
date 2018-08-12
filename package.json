@@ -1,21 +1,26 @@
 {
   "name": "ejs_template",
-  "version": "7.0.1",
+  "version": "8.0.0",
   "description": "ejsでのテンプレート",
   "main": "index.js",
   "dependencies": {
     "auto-prefixer": "^0.4.2",
     "browser-sync": "^2.24.6",
     "del": "^3.0.0",
+    "glob": "^7.1.2",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^3.9.4",
     "gulp-concat": "^2.6.1",
     "gulp-if": "^2.0.2",
     "gulp-uglify": "^3.0.1",
     "gulp-watch": "^5.0.1",
+    "imagesloaded": "^4.1.4",
+    "jquery": "^3.3.1",
     "minimist": "^1.2.0",
     "run-sequence": "^2.2.1",
-    "uglify": "^0.1.5"
+    "uglify": "^0.1.5",
+    "velocity-animate": "^1.5.2",
+    "webpack-stream": "^5.1.1"
   },
   "devDependencies": {
     "browser-sync": "^2.24.6",
@@ -31,7 +36,9 @@
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.1",
     "gulp-watch": "^5.0.1",
-    "lodash": "^4.17.10"
+    "lodash": "^4.17.10",
+    "webpack": "^4.16.5",
+    "webpack-dev-server": "^3.1.5"
   },
   "scripts": {
     "dev": "gulp build --env dev",
