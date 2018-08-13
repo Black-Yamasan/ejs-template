@@ -4,8 +4,8 @@
 
 export default class sample2 {
   constructor() {
-    ;(function($) {
+    ;(($ => {
       console.log('sample2');
-    })(jQuery);
+    }))(jQuery);
   };
 };
