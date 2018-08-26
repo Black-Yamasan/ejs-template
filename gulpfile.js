@@ -1,31 +1,31 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var autoprefixer = require('gulp-autoprefixer');
-var ejs = require('gulp-ejs');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var cleanCss = require('gulp-clean-css');
-var watch = require('gulp-watch');
-var plumber = require('gulp-plumber');
-var notify = require('gulp-notify');
-var cache = require('gulp-cached');
-var changed = require('gulp-changed');
-var rename = require('gulp-rename');
-var gulpif = require('gulp-if');
-var minimist = require('minimist');
-var del = require('del');
-var browserSync = require('browser-sync').create();
-var runSequence = require('run-sequence');
-var webpackStream = require('webpack-stream');
-var webpack = require('webpack');
-var destDir = './dist/';
-var prodDir = './htdocs/';
-var options = minimist(process.argv.slice(2), config);
-var config = {
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const autoprefixer = require('gulp-autoprefixer');
+const ejs = require('gulp-ejs');
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
+const cleanCss = require('gulp-clean-css');
+const watch = require('gulp-watch');
+const plumber = require('gulp-plumber');
+const notify = require('gulp-notify');
+const cache = require('gulp-cached');
+const changed = require('gulp-changed');
+const rename = require('gulp-rename');
+const gulpif = require('gulp-if');
+const minimist = require('minimist');
+const del = require('del');
+const browserSync = require('browser-sync').create();
+const runSequence = require('run-sequence');
+const webpackStream = require('webpack-stream');
+const webpack = require('webpack');
+const destDir = './dist/';
+const prodDir = './htdocs/';
+const config = {
 	string: 'env',
 	default: { env: process.env.NODE_ENV || 'dev'}
 }
-var isProd = (options.env === 'prod') ? true : false;
+const options = minimist(process.argv.slice(2), config);
+let isProd = (options.env === 'prod') ? true : false;
 console.log('[build env]', options.env, '[isProd]', isProd);
 
 const webpackConfig = require('./webpack.config');
