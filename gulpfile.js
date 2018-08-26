@@ -50,8 +50,8 @@ gulp.task('sass', function() {
 			path.dirname = 'css'
 		}))
 		.pipe(autoprefixer({
-            browsers: ['last 2 version', 'iOS >= 9', 'Android >= 4.6'],
-            cascade: false
+      browsers: ['last 2 version', 'iOS >= 9', 'Android >= 4.6'],
+      cascade: false
     }))
 		.pipe(gulpif(isProd, cleanCss()))
     .pipe(gulpif(!isProd, gulp.dest(destDir)))
@@ -70,8 +70,8 @@ gulp.task('sass-sp', function() {
 			path.dirname = 'css'
 		}))
 		.pipe(autoprefixer({
-            browsers: ['last 2 version', 'iOS >= 9', 'Android >= 4.6'],
-            cascade: false
+      browsers: ['last 2 version', 'iOS >= 9', 'Android >= 4.6'],
+      cascade: false
     }))
 		.pipe(gulpif(isProd, cleanCss()))
     .pipe(gulpif(!isProd, gulp.dest(destDir + 'sp/')))
