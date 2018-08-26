@@ -81,9 +81,9 @@ gulp.task('sass-sp', function() {
 
 gulp.task('webpack', function() {
 	return webpackStream(webpackConfig, webpack)
-	.pipe(plumber({
-		errorHandler: notify.onError('Error: <%= error.message %>')
-	}))
+	.on('error', function handleError() {
+		this.emit('end');
+	})
 	.pipe(gulpif(!isProd, gulp.dest(destDir)))
 	.pipe(gulpif(isProd, gulp.dest(prodDir)))
 });
