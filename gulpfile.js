@@ -1,31 +1,31 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var autoprefixer = require('gulp-autoprefixer');
-var ejs = require('gulp-ejs');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var cleanCss = require('gulp-clean-css');
-var watch = require('gulp-watch');
-var plumber = require('gulp-plumber');
-var notify = require('gulp-notify');
-var cache = require('gulp-cached');
-var changed = require('gulp-changed');
-var rename = require('gulp-rename');
-var gulpif = require('gulp-if');
-var minimist = require('minimist');
-var del = require('del');
-var browserSync = require('browser-sync').create();
-var runSequence = require('run-sequence');
-var webpackStream = require('webpack-stream');
-var webpack = require('webpack');
-var destDir = './dist/';
-var prodDir = './htdocs/';
-var options = minimist(process.argv.slice(2), config);
-var config = {
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const autoprefixer = require('gulp-autoprefixer');
+const ejs = require('gulp-ejs');
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
+const cleanCss = require('gulp-clean-css');
+const watch = require('gulp-watch');
+const plumber = require('gulp-plumber');
+const notify = require('gulp-notify');
+const cache = require('gulp-cached');
+const changed = require('gulp-changed');
+const rename = require('gulp-rename');
+const gulpif = require('gulp-if');
+const minimist = require('minimist');
+const del = require('del');
+const browserSync = require('browser-sync').create();
+const runSequence = require('run-sequence');
+const webpackStream = require('webpack-stream');
+const webpack = require('webpack');
+const destDir = './dist/';
+const prodDir = './htdocs/';
+const config = {
 	string: 'env',
 	default: { env: process.env.NODE_ENV || 'dev'}
 }
-var isProd = (options.env === 'prod') ? true : false;
+const options = minimist(process.argv.slice(2), config);
+let isProd = (options.env === 'prod') ? true : false;
 console.log('[build env]', options.env, '[isProd]', isProd);
 
 const webpackConfig = require('./webpack.config');
@@ -50,8 +50,8 @@ gulp.task('sass', function() {
 			path.dirname = 'css'
 		}))
 		.pipe(autoprefixer({
-            browsers: ['last 2 version', 'iOS >= 9', 'Android >= 4.6'],
-            cascade: false
+      browsers: ['last 2 version', 'iOS >= 9', 'Android >= 4.6'],
+      cascade: false
     }))
 		.pipe(gulpif(isProd, cleanCss()))
     .pipe(gulpif(!isProd, gulp.dest(destDir)))
@@ -70,8 +70,8 @@ gulp.task('sass-sp', function() {
 			path.dirname = 'css'
 		}))
 		.pipe(autoprefixer({
-            browsers: ['last 2 version', 'iOS >= 9', 'Android >= 4.6'],
-            cascade: false
+      browsers: ['last 2 version', 'iOS >= 9', 'Android >= 4.6'],
+      cascade: false
     }))
 		.pipe(gulpif(isProd, cleanCss()))
     .pipe(gulpif(!isProd, gulp.dest(destDir + 'sp/')))
@@ -81,9 +81,9 @@ gulp.task('sass-sp', function() {
 
 gulp.task('webpack', function() {
 	return webpackStream(webpackConfig, webpack)
-	.pipe(plumber({
-		errorHandler: notify.onError('Error: <%= error.message %>')
-	}))
+	.on('error', function handleError() {
+		this.emit('end');
+	})
 	.pipe(gulpif(!isProd, gulp.dest(destDir)))
 	.pipe(gulpif(isProd, gulp.dest(prodDir)))
 });
