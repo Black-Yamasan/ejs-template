@@ -1,6 +1,6 @@
 {
   "name": "ejs_template",
-  "version": "9.0.1",
+  "version": "9.0.2",
   "description": "ejsでのテンプレート",
   "main": "index.js",
   "dependencies": {
