@@ -58,6 +58,9 @@ webpackのエラーの際にwatchが停止しないようにタスクを修正�
 ### ver 9.0.2
 不要なパッケージ削除。easingのscss追加。
 
+### ver 9.0.3
+easingのscss修正
+
 ### 使い方と仕様
 
 
