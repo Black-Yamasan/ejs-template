@@ -100,7 +100,7 @@ npx gulp sp
   4. コマンド「 `npx gulp` 」でローカルサーバー起動（/sp以下を監視する場合は `npx gulp-sp` ）
   5. 開発が終わったら本番環境用にソースをビルド
   - htdocs/を一旦空にする「 `npx gulp clean` 」
-  - 本番環境用のソースをビルド「 `gulp build --env prod` 」  
+  - 本番環境用のソースをビルド「 `npx gulp build --env prod` 」  
   ＊ htdocs/以下にminifyしたcssやjsが入ります。
 
 #### ＜仕様＞
