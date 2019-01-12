@@ -12,7 +12,7 @@ const gulpif = require('gulp-if');
 const minimist = require('minimist');
 const del = require('del');
 const browserSync = require('browser-sync').create();
-const runSequence = require('run-sequence');
+const runSequence = require('gulp4-run-sequence');
 const webpackStream = require('webpack-stream');
 const webpack = require('webpack');
 const destDir = './dist/';
@@ -124,61 +124,66 @@ gulp.task('bs-reload', function(){
 
 gulp.task('clean', del.bind(null, prodDir));
 
-gulp.task('build', ['sass', 'webpack', 'ejs', 'images', 'sass-sp', 'ejs-sp', 'images-sp'], function() {
-});
+gulp.task('build', gulp.series(
+  gulp.parallel('sass', 'webpack', 'ejs', 'images', 'sass-sp', 'ejs-sp', 'images-sp')
+));
 
 
-gulp.task('default', ['browser-sync', 'sass', 'webpack', 'ejs', 'images'], function() {
-	watch(['src/pc/styles/**/*.scss'], function() {
-		return runSequence(
-			'sass',
-			'bs-reload'
-		);
-	});
-	watch(['src/common/js/**/*.js', 'src/pc/js/**/*.js'], function() {
-		return runSequence(
-			'webpack',
-			'bs-reload'
-		)
-	});
-	watch(['src/pc/**/*.ejs'], function() {
-		return runSequence(
-			'ejs',
-			'bs-reload'
-		);
-	});
-	watch(['src/pc/images/**/*'], function() {
-		return runSequence(
-			'images',
-			'bs-reload'
-		);
-	});
-});
+gulp.task('default', gulp.series(
+  gulp.parallel('browser-sync', 'sass', 'webpack', 'ejs', 'images', function() {
+    watch(['src/pc/styles/**/*.scss'], function() {
+  		return runSequence(
+  			'sass',
+  			'bs-reload'
+  		);
+  	});
+  	watch(['src/common/js/**/*.js', 'src/pc/js/**/*.js'], function() {
+  		return runSequence(
+  			'webpack',
+  			'bs-reload'
+  		)
+  	});
+  	watch(['src/pc/**/*.ejs'], function() {
+  		return runSequence(
+  			'ejs',
+  			'bs-reload'
+  		);
+  	});
+  	watch(['src/pc/images/**/*'], function() {
+  		return runSequence(
+  			'images',
+  			'bs-reload'
+  		);
+  	});
+  })
+));
 
 
-gulp.task('sp', ['browser-sync', 'sass-sp', 'webpack', 'ejs-sp', 'images-sp'], function() {
-	watch(['src/sp/styles/**/*.scss'], function() {
-		return runSequence(
-			'sass-sp',
-			'bs-reload'
-		);
-	});
-	watch(['src/common/js/**/*.js', 'src/sp/js/**/*.js'], function() {
-		return runSequence(
-			'webpack',
-			'bs-reload'
-		)
-	});
-	watch(['src/sp/**/*.ejs'], function() {
-		return runSequence(
-			'ejs-sp',
-			'bs-reload'
-		);
-	});
-	watch(['src/sp/images/**/*'], function() {
-		return runSequence(
-			'images-sp',
-			'bs-reload'
-		);
-	});
-});
+gulp.task('sp', gulp.series(
+  gulp.parallel('browser-sync', 'sass-sp', 'webpack', 'ejs-sp', 'images-sp', function() {
+    watch(['src/sp/styles/**/*.scss'], function() {
+  		return runSequence(
+  			'sass-sp',
+  			'bs-reload'
+  		);
+  	});
+  	watch(['src/common/js/**/*.js', 'src/sp/js/**/*.js'], function() {
+  		return runSequence(
+  			'webpack',
+  			'bs-reload'
+  		)
+  	});
+  	watch(['src/sp/**/*.ejs'], function() {
+  		return runSequence(
+  			'ejs-sp',
+  			'bs-reload'
+  		);
+  	});
+  	watch(['src/sp/images/**/*'], function() {
+  		return runSequence(
+  			'images-sp',
+  			'bs-reload'
+  		);
+  	});
+  })
+));
