@@ -67,26 +67,56 @@ easingのscss修正
 gulpのバージョンをv3.9.1からv4.0.0にアップデート  
 他のパッケージもアップデート  
 gulpのバージョンアップに伴い、ビルドコマンドが変更になりました。
+
+### ver 10.0.1
+ビルドコマンド変更  
+
 #### ローカル開発用ソースのビルド
+
 ```
-npx gulp build
+npm run dev
 ```
-若しくは  
+
+or 
+
 ```
-npx gulp build --env dev
-```  
+yarn run dev
+```
+
 #### 本番環境(サーバーアップ用)ソースのビルド
+
 ```
-npx gulp build --env prod
+npm run prod
 ```
+
+or 
+
+```
+yarn run prod
+```
+
 #### ローカル開発用のビルドと監視
 ##### PCディレクトリ
+
 ```
-npx gulp
+npm run start
+```
+
+or 
+
+```
+yarn run start
 ```
 ##### SPディレクトリ
+
 ```
-npx gulp sp
+npm run start-sp
+```
+
+or 
+
+```
+yarn run start-sp
 ```
 
 
