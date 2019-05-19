@@ -6,7 +6,6 @@ const cleanCss = require('gulp-clean-css');
 const watch = require('gulp-watch');
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
-const changed = require('gulp-changed');
 const rename = require('gulp-rename');
 const gulpif = require('gulp-if');
 const minimist = require('minimist');
