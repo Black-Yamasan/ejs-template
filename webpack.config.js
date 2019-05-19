@@ -23,7 +23,7 @@ glob.sync('./src/pc/**/*.js', {
 }).map(function(file) {
 	const regExp = new RegExp(`./src/pc/js/`);
   const key = file.replace(regExp, 'js/');
-  entries[key] = file;
+  entries[key] = ['babel-polyfill', file];
 });
 
 glob.sync('./src/sp/**/*.js', {
@@ -31,9 +31,8 @@ glob.sync('./src/sp/**/*.js', {
 }).map(function(file) {
 	const regExp = new RegExp(`./src/sp/js/`);
   const key = file.replace(regExp, 'sp/js/');
-  entries[key] = file;
+  entries[key] = ['babel-polyfill', file];
 });
-
 
 module.exports = {
 
@@ -53,7 +52,7 @@ module.exports = {
 						loader: 'babel-loader',
 						options: {
 							presets: [
-								['es2015']
+								['@babel/preset-env']
 							]
 						}
 					}
