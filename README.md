@@ -79,13 +79,16 @@ jestを導入
 babel-polyfillを追加  
 不要なパッケージを削除
 
+### ver 10.0.4
+gulp-ejsのバージョンを4系にアップデート
+
 #### ローカル開発用ソースのビルド
 
 ```
 npm run dev
 ```
 
-or 
+or
 
 ```
 yarn run dev
@@ -96,9 +99,9 @@ yarn run dev
 ```
 npm run lint:style
 ```
-  
+
 or
-  
+
 ```
 yarn run lint:style
 ```
@@ -108,20 +111,20 @@ yarn run lint:style
 ```
 npm run test
 ```
-  
+
 or
-  
+
 ```
 yarn run test
 ```
-  
+
 #### 本番環境(サーバーアップ用)ソースのビルド
 
 ```
 npm run prod
 ```
 
-or 
+or
 
 ```
 yarn run prod
@@ -134,7 +137,7 @@ yarn run prod
 npm run start
 ```
 
-or 
+or
 
 ```
 yarn run start
@@ -145,7 +148,7 @@ yarn run start
 npm run start-sp
 ```
 
-or 
+or
 
 ```
 yarn run start-sp
