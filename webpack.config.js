@@ -5,13 +5,15 @@ const glob = require('glob');
 const entries = {};
 const minimist = require('minimist');
 const config = {
-	string: 'env',
-	default: { env: process.env.NODE_ENV || 'dev'}
+  string: 'env',
+  default: {
+    env: process.env.NODE_ENV || 'dev'
+  }
 }
 const options = minimist(process.argv.slice(2), config);
 let isProd = (options.env === 'prod') ? true : false;
 let modeValue = null;
-if ( isProd ) {
+if (isProd) {
   modeValue = 'production';
 } else {
   modeValue = 'development';
@@ -19,23 +21,22 @@ if ( isProd ) {
 
 
 glob.sync('./src/pc/**/*.js', {
-	ignore: './src/**/_*.js'
-}).map(function(file) {
-	const regExp = new RegExp(`./src/pc/js/`);
+  ignore: './src/**/_*.js'
+}).map(function (file) {
+  const regExp = new RegExp(`./src/pc/js/`);
   const key = file.replace(regExp, 'js/');
   entries[key] = ['babel-polyfill', file];
 });
 
 glob.sync('./src/sp/**/*.js', {
-	ignore: './src/**/_*.js'
-}).map(function(file) {
-	const regExp = new RegExp(`./src/sp/js/`);
+  ignore: './src/**/_*.js'
+}).map(function (file) {
+  const regExp = new RegExp(`./src/sp/js/`);
   const key = file.replace(regExp, 'sp/js/');
   entries[key] = ['babel-polyfill', file];
 });
 
 module.exports = {
-
   entry: entries,
   mode: modeValue,
   output: {
@@ -44,31 +45,26 @@ module.exports = {
   },
   devtool: !isProd ? 'inline-source-map' : false,
   module: {
-    rules: [
-      {
-        test: /\.js$/,
-				use: [
-					{
-						loader: 'babel-loader',
-						options: {
-							presets: [
-								['@babel/preset-env']
-							]
-						}
-					}
-				],
-        exclude: /node_modules/
-      }
-    ]
+    rules: [{
+      test: /\.js$/,
+      use: [{
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            ['@babel/preset-env']
+          ]
+        }
+      }],
+      exclude: /node_modules/
+    }]
   },
   plugins: [
-    new webpack.ProvidePlugin(
-      { jQuery: 'jquery',
-        $: 'jquery',
-        'window.jQuery': 'jquery',
-        imagesLoaded: 'imagesLoaded',
-        velocity: 'velocity-animate'
-      }
-    )
+    new webpack.ProvidePlugin({
+      jQuery: 'jquery',
+      $: 'jquery',
+      'window.jQuery': 'jquery',
+      imagesLoaded: 'imagesLoaded',
+      velocity: 'velocity-animate'
+    })
   ]
 };
