@@ -82,6 +82,9 @@ babel-polyfillを追加
 ### ver 10.0.4
 gulp-ejsのバージョンを4系にアップデート
 
+### ver 10.0.5
+svgのスプライトのタスクを追加
+
 #### ローカル開発用ソースのビルド
 
 ```
@@ -161,16 +164,16 @@ yarn run start-sp
 #### ＜使い方＞
   1. nodeとwebpackをグローバルにインストール
   2. 作業ディレクトリに移動し、コマンド「 `npm install` 」で必要なパッケージをインストール
-  3. 開発用ソースのビルド「 `npx gulp build --env dev` 」
-  4. コマンド「 `npx gulp` 」でローカルサーバー起動（/sp以下を監視する場合は `npx gulp-sp` ）
+  3. 開発用ソースのビルド「 `npm run dev` 」
+  4. コマンド「 `npm run start` 」でローカルサーバー起動（/sp以下を監視する場合は `npm run start-sp` ）
   5. 開発が終わったら本番環境用にソースをビルド
   - htdocs/を一旦空にする「 `npx gulp clean` 」
-  - 本番環境用のソースをビルド「 `npx gulp build --env prod` 」  
+  - 本番環境用のソースをビルド「 `npm run prod` 」  
   ＊ htdocs/以下にminifyしたcssやjsが入ります。
 
 #### ＜仕様＞
   * /src/templates/pages/以下の.ejsファイル、/src/styles/以下の.scssファイル、/src/js/以下のjsファイルを上書き保存すると、自動ビルドとブラウザリロードが始まります。  
-  ＊/src/templates/の/pages/以外を編集した場合には、ターミナル上で「Ctr+C」で一旦gulpを止めてから、再びターミナル上で「`npx gulp` 」コマンドを叩いて下さい。  
+  ＊/src/templates/の/pages/以外を編集した場合には、ターミナル上で「Ctr+C」で一旦gulpを止めてから、再びターミナル上で「`npm run start` 」コマンドを叩いて下さい。  
   ＊処理が重い場合やPCのスペック・メモリの都合でリロードしても変更が反映しきれない場合があります。  
   その場合には手動でブラウザをリロードして下さい。  
   * /src/以下のファイルを編集すると、/src/と同じ階層に「/dist/」フォルダが自動的に生成されます。  
