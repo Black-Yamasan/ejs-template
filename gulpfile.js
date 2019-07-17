@@ -14,6 +14,10 @@ const browserSync = require('browser-sync').create();
 const runSequence = require('gulp4-run-sequence');
 const webpackStream = require('webpack-stream');
 const webpack = require('webpack');
+const svgstore = require('gulp-svgstore');
+const cheerio = require('gulp-cheerio');
+const svgmin = require('gulp-svgmin');
+const path = require('path');
 const destDir = './dist/';
 const prodDir = './htdocs/';
 const config = {
@@ -76,7 +80,6 @@ gulp.task('sass-sp', () => {
     .pipe(gulpif(isProd, gulp.dest(prodDir + 'sp/')))
 });
 
-
 gulp.task('webpack', () => {
   return webpackStream(webpackConfig, webpack)
     .on('error', function handleError() {
@@ -123,6 +126,39 @@ gulp.task('images-sp', () => {
     .pipe(gulpif(isProd, gulp.dest(prodDir + 'sp/images/')))
 });
 
+gulp.task('svgstore', () => {
+  return gulp.src(['src/common/svg/**/*.svg'])
+  .pipe(svgmin((file) => {
+    let prefix = path.basename(file.relative, path.extname(file.relative))
+    return {
+      plugins: [{
+        cleanupIDs: {
+          prefix: prefix + '-',
+          minify: true
+        }
+      }]
+    }
+  }))
+  .pipe(svgstore({
+    inlineSvg: true
+  }))
+  .pipe(cheerio({
+    run: function($) {
+      $('[fill]').removeAttr('fill');
+      $('[stroke]').removeAttr('stroke')
+      $('svg').attr({
+        'display': 'none',
+        'xmlns:xlink': 'http://www.w3.org/1999/xlink'
+      });
+    },
+    parserOptions: { xmlMode: true }
+  }))
+  .pipe(rename(path => {
+    path.basename = 'icons'
+  }))
+  .pipe(gulpif(!isProd, gulp.dest(destDir + 'svg/')))
+  .pipe(gulpif(isProd, gulp.dest(prodDir + 'svg/')))
+});
 
 gulp.task('bs-reload', () => {
   browserSync.reload();
@@ -131,12 +167,11 @@ gulp.task('bs-reload', () => {
 gulp.task('clean', del.bind(null, prodDir));
 
 gulp.task('build', gulp.series(
-  gulp.parallel('sass', 'webpack', 'ejs', 'images', 'sass-sp', 'ejs-sp', 'images-sp')
+  gulp.parallel('sass', 'webpack', 'ejs', 'images', 'sass-sp', 'ejs-sp', 'images-sp', 'svgstore')
 ));
 
-
 gulp.task('default', gulp.series(
-  gulp.parallel('browser-sync', 'sass', 'webpack', 'ejs', 'images', () => {
+  gulp.parallel('browser-sync', 'sass', 'webpack', 'ejs', 'images', 'svgstore', () => {
     watch(['src/pc/styles/**/*.scss'], () => {
       return runSequence(
         'sass',
@@ -161,9 +196,14 @@ gulp.task('default', gulp.series(
         'bs-reload'
       );
     });
+    watch(['src/common/svg/**/*.svg'], () => {
+      return runSequence(
+        'svgstore',
+        'bs-reload'
+      );
+    });
   })
 ));
-
 
 gulp.task('sp', gulp.series(
   gulp.parallel('browser-sync', 'sass-sp', 'webpack', 'ejs-sp', 'images-sp', () => {
