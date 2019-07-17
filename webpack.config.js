@@ -24,7 +24,7 @@ glob.sync('./src/pc/**/*.js', {
   ignore: './src/**/_*.js'
 }).map(function (file) {
   const regExp = new RegExp(`./src/pc/js/`);
-  const key = file.replace(regExp, 'js/');
+  const key = file.replace(regExp, 'assets/js/');
   entries[key] = ['babel-polyfill', file];
 });
 
@@ -32,7 +32,7 @@ glob.sync('./src/sp/**/*.js', {
   ignore: './src/**/_*.js'
 }).map(function (file) {
   const regExp = new RegExp(`./src/sp/js/`);
-  const key = file.replace(regExp, 'sp/js/');
+  const key = file.replace(regExp, 'sp/assets/js/');
   entries[key] = ['babel-polyfill', file];
 });
 

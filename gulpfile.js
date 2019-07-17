@@ -49,7 +49,7 @@ gulp.task('sass', () => {
       outputStyle: 'expanded'
     }))
     .pipe(rename(function (path) {
-      path.dirname = 'css'
+      path.dirname = 'assets/css'
     }))
     .pipe(autoprefixer({
       overrideBrowserslist: ['last 2 version', 'iOS >= 11', 'Android >= 5'],
@@ -69,7 +69,7 @@ gulp.task('sass-sp', () => {
       outputStyle: 'expanded'
     }))
     .pipe(rename(function (path) {
-      path.dirname = 'css'
+      path.dirname = 'assets/css'
     }))
     .pipe(autoprefixer({
       overrideBrowserslist: ['last 2 version', 'iOS >= 11', 'Android >= 5'],
@@ -116,14 +116,14 @@ gulp.task('ejs-sp', () => {
 
 gulp.task('images', () => {
   return gulp.src(['src/pc/images/**/'])
-    .pipe(gulpif(!isProd, gulp.dest(destDir + 'images/')))
-    .pipe(gulpif(isProd, gulp.dest(prodDir + 'images/')))
+    .pipe(gulpif(!isProd, gulp.dest(destDir + 'assets/images/')))
+    .pipe(gulpif(isProd, gulp.dest(prodDir + 'assets/images/')))
 });
 
 gulp.task('images-sp', () => {
   return gulp.src(['src/sp/images/**/'])
-    .pipe(gulpif(!isProd, gulp.dest(destDir + 'sp/images/')))
-    .pipe(gulpif(isProd, gulp.dest(prodDir + 'sp/images/')))
+    .pipe(gulpif(!isProd, gulp.dest(destDir + 'sp/assets/images/')))
+    .pipe(gulpif(isProd, gulp.dest(prodDir + 'sp/assets/images/')))
 });
 
 gulp.task('svgstore', () => {
@@ -156,8 +156,8 @@ gulp.task('svgstore', () => {
   .pipe(rename(path => {
     path.basename = 'icons'
   }))
-  .pipe(gulpif(!isProd, gulp.dest(destDir + 'svg/')))
-  .pipe(gulpif(isProd, gulp.dest(prodDir + 'svg/')))
+  .pipe(gulpif(!isProd, gulp.dest(destDir + 'assets/svg/')))
+  .pipe(gulpif(isProd, gulp.dest(prodDir + 'assets/svg/')))
 });
 
 gulp.task('bs-reload', () => {
