@@ -52,7 +52,7 @@ gulp.task('sass', () => {
       path.dirname = 'css'
     }))
     .pipe(autoprefixer({
-      browsers: ['last 2 version', 'iOS >= 9', 'Android >= 4.6'],
+      overrideBrowserslist: ['last 2 version', 'iOS >= 11', 'Android >= 5'],
       cascade: false
     }))
     .pipe(gulpif(isProd, cleanCss()))
@@ -72,7 +72,7 @@ gulp.task('sass-sp', () => {
       path.dirname = 'css'
     }))
     .pipe(autoprefixer({
-      browsers: ['last 2 version', 'iOS >= 9', 'Android >= 4.6'],
+      overrideBrowserslist: ['last 2 version', 'iOS >= 11', 'Android >= 5'],
       cascade: false
     }))
     .pipe(gulpif(isProd, cleanCss()))
