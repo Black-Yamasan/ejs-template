@@ -1,8 +1,8 @@
     </div><!-- #container -->
   <%_ include ../layout/_footer _%>
   </div><!-- #wrapper -->
-<%_ for ( var i = 0; i < jsFile.length; i++ ) { _%>
-<script type="text/javascript" src="<%= root %>assets/js/<%= jsFile[i] %>.js"></script>
+<%_ for ( var i = 0; i < JS_FILE.length; i++ ) { _%>
+<script type="text/javascript" src="<%= ROOT %>assets/js/<%= JS_FILE[i] %>.js"></script>
 <%_ } _%>
 </body>
 </html>
