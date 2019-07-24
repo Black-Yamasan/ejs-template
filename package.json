@@ -49,7 +49,6 @@
     "dev": "npx gulp build --env dev",
     "prod": "npx gulp build --env prod",
     "start": "npx gulp",
-    "start-sp": "npx gulp sp",
     "lint:style": "stylelint --fix src/**/*.scss",
     "test": "jest"
   },

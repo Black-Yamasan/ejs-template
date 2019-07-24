@@ -41,7 +41,7 @@ gulp.task('browser-sync', () => {
 });
 
 gulp.task('sass', () => {
-  return gulp.src(['src/pc/styles/**/*.scss'])
+  return gulp.src(['src/styles/**/*.scss'])
     .pipe(plumber({
       errorHandler: notify.onError('Error: <%= error.message %>')
     }))
@@ -58,26 +58,6 @@ gulp.task('sass', () => {
     .pipe(gulpif(isProd, cleanCss()))
     .pipe(gulpif(!isProd, gulp.dest(destDir)))
     .pipe(gulpif(isProd, gulp.dest(prodDir)))
-});
-
-gulp.task('sass-sp', () => {
-  return gulp.src(['src/sp/styles/**/*.scss'])
-    .pipe(plumber({
-      errorHandler: notify.onError('Error: <%= error.message %>')
-    }))
-    .pipe(sass({
-      outputStyle: 'expanded'
-    }))
-    .pipe(rename(function (path) {
-      path.dirname = 'assets/css'
-    }))
-    .pipe(autoprefixer({
-      overrideBrowserslist: ['last 2 version', 'iOS >= 11', 'Android >= 5'],
-      cascade: false
-    }))
-    .pipe(gulpif(isProd, cleanCss()))
-    .pipe(gulpif(!isProd, gulp.dest(destDir + 'sp/')))
-    .pipe(gulpif(isProd, gulp.dest(prodDir + 'sp/')))
 });
 
 gulp.task('webpack', () => {
@@ -90,7 +70,7 @@ gulp.task('webpack', () => {
 });
 
 gulp.task('ejs', () => {
-  return gulp.src(['src/pc/templates/pages/**/*.ejs', '!src/pc/templates/**/_*.ejs'])
+  return gulp.src(['src/templates/pages/**/*.ejs', '!src/templates/**/_*.ejs'])
     .pipe(plumber({
       errorHandler: notify.onError('Error: <%= error.message %>')
     }))
@@ -102,32 +82,14 @@ gulp.task('ejs', () => {
     .pipe(gulpif(isProd, gulp.dest(prodDir)))
 })
 
-gulp.task('ejs-sp', () => {
-  return gulp.src(['src/sp/templates/pages/**/*.ejs', '!src/sp/templates/**/_*.ejs'])
-    .pipe(plumber({
-      errorHandler: notify.onError('Error: <%= error.message %>')
-    }))
-    .pipe(ejs({}, {}, {
-      ext: '.html'
-    }))
-    .pipe(gulpif(!isProd, gulp.dest(destDir + 'sp/')))
-    .pipe(gulpif(isProd, gulp.dest(prodDir + 'sp/')))
-})
-
 gulp.task('images', () => {
-  return gulp.src(['src/pc/images/**/'])
+  return gulp.src(['src/images/**/'])
     .pipe(gulpif(!isProd, gulp.dest(destDir + 'assets/images/')))
     .pipe(gulpif(isProd, gulp.dest(prodDir + 'assets/images/')))
 });
 
-gulp.task('images-sp', () => {
-  return gulp.src(['src/sp/images/**/'])
-    .pipe(gulpif(!isProd, gulp.dest(destDir + 'sp/assets/images/')))
-    .pipe(gulpif(isProd, gulp.dest(prodDir + 'sp/assets/images/')))
-});
-
 gulp.task('svgstore', () => {
-  return gulp.src(['src/common/svg/**/*.svg'])
+  return gulp.src(['src/svg/**/*.svg'])
   .pipe(svgmin((file) => {
     let prefix = path.basename(file.relative, path.extname(file.relative))
     return {
@@ -167,30 +129,30 @@ gulp.task('bs-reload', () => {
 gulp.task('clean', del.bind(null, prodDir));
 
 gulp.task('build', gulp.series(
-  gulp.parallel('sass', 'webpack', 'ejs', 'images', 'sass-sp', 'ejs-sp', 'images-sp', 'svgstore')
+  gulp.parallel('sass', 'webpack', 'ejs', 'images', 'svgstore')
 ));
 
 gulp.task('default', gulp.series(
   gulp.parallel('browser-sync', 'sass', 'webpack', 'ejs', 'images', 'svgstore', () => {
-    watch(['src/pc/styles/**/*.scss'], () => {
+    watch(['src/styles/**/*.scss'], () => {
       return runSequence(
         'sass',
         'bs-reload'
       );
     });
-    watch(['src/common/js/**/*.js', 'src/pc/js/**/*.js'], () => {
+    watch(['src/common/js/**/*.js', 'src/js/**/*.js'], () => {
       return runSequence(
         'webpack',
         'bs-reload'
       )
     });
-    watch(['src/pc/**/*.ejs'], () => {
+    watch(['src/templates/**/*.ejs'], () => {
       return runSequence(
         'ejs',
         'bs-reload'
       );
     });
-    watch(['src/pc/images/**/*'], () => {
+    watch(['src/images/**/*'], () => {
       return runSequence(
         'images',
         'bs-reload'
@@ -199,35 +161,6 @@ gulp.task('default', gulp.series(
     watch(['src/common/svg/**/*.svg'], () => {
       return runSequence(
         'svgstore',
-        'bs-reload'
-      );
-    });
-  })
-));
-
-gulp.task('sp', gulp.series(
-  gulp.parallel('browser-sync', 'sass-sp', 'webpack', 'ejs-sp', 'images-sp', () => {
-    watch(['src/sp/styles/**/*.scss'], () => {
-      return runSequence(
-        'sass-sp',
-        'bs-reload'
-      );
-    });
-    watch(['src/common/js/**/*.js', 'src/sp/js/**/*.js'], () => {
-      return runSequence(
-        'webpack',
-        'bs-reload'
-      )
-    });
-    watch(['src/sp/**/*.ejs'], () => {
-      return runSequence(
-        'ejs-sp',
-        'bs-reload'
-      );
-    });
-    watch(['src/sp/images/**/*'], () => {
-      return runSequence(
-        'images-sp',
         'bs-reload'
       );
     });
