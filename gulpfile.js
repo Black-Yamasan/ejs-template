@@ -83,7 +83,7 @@ gulp.task('ejs', () => {
 })
 
 gulp.task('images', () => {
-  return gulp.src(['src/images/**/'])
+  return gulp.src(['src/images/**/*'])
     .pipe(gulpif(!isProd, gulp.dest(destDir + 'assets/images/')))
     .pipe(gulpif(isProd, gulp.dest(prodDir + 'assets/images/')))
 });
