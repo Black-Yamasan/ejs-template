@@ -92,6 +92,12 @@ Sassのバージョンアップに伴い、Sassのタスクを修正。対象ブ
 ### ver 10.0.7
 画像・css・jsファイルの出力先を「assets/」以下に変更
 
+### ver 11.0.0
+spディレクトリを削除  
+不要なパッケージを削除  
+devDependenciesのみにする  
+パッケージのバージョンを固定
+
 #### ローカル開発用ソースのビルド
 
 ```
@@ -172,7 +178,7 @@ yarn run start-sp
   1. nodeとwebpackをグローバルにインストール
   2. 作業ディレクトリに移動し、コマンド「 `npm install` 」で必要なパッケージをインストール
   3. 開発用ソースのビルド「 `npm run dev` 」
-  4. コマンド「 `npm run start` 」でローカルサーバー起動（/sp以下を監視する場合は `npm run start-sp` ）
+  4. コマンド「 `npm run start` 」でローカルサーバー起動
   5. 開発が終わったら本番環境用にソースをビルド
   - htdocs/を一旦空にする「 `npx gulp clean` 」
   - 本番環境用のソースをビルド「 `npm run prod` 」  
