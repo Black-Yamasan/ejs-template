@@ -98,6 +98,9 @@ spディレクトリを削除
 devDependenciesのみにする  
 パッケージのバージョンを固定
 
+### ver 11.0.1
+ejsの構成変更
+
 #### ローカル開発用ソースのビルド
 
 ```
@@ -158,18 +161,6 @@ or
 ```
 yarn run start
 ```
-##### SPディレクトリ
-
-```
-npm run start-sp
-```
-
-or
-
-```
-yarn run start-sp
-```
-
 
 ### 使い方と仕様
 
