@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
 const glob = require('glob');
 
@@ -11,13 +12,8 @@ const config = {
   }
 }
 const options = minimist(process.argv.slice(2), config);
-let isProd = (options.env === 'prod') ? true : false;
-let modeValue = null;
-if (isProd) {
-  modeValue = 'production';
-} else {
-  modeValue = 'development';
-}
+const isProd = (options.env === 'prod') ? true : false;
+const modeValue = ( isProd ) ? 'production' : 'development';
 
 
 glob.sync('./src/**/*.js', {
@@ -25,7 +21,7 @@ glob.sync('./src/**/*.js', {
 }).map(function (file) {
   const regExp = new RegExp(`./src/js/`);
   const key = file.replace(regExp, 'assets/js/');
-  entries[key] = ['babel-polyfill', file];
+  entries[key] = [file];
 });
 
 module.exports = {
@@ -50,12 +46,25 @@ module.exports = {
       exclude: /node_modules/
     }]
   },
+  optimization: {
+    minimize: isProd,
+    minimizer: [
+      new TerserPlugin({
+        test: /\.js(\?.*)?$/i,
+        terserOptions: {
+          ecma: 6,
+          compress: { drop_console: isProd },
+          output: {
+            comments: /^\**!|@preserve|@license|@cc_on/i,
+            beautify: !isProd
+          }
+        },
+        extractComments: true
+      })
+    ]
+  },
   plugins: [
     new webpack.ProvidePlugin({
-      jQuery: 'jquery',
-      $: 'jquery',
-      'window.jQuery': 'jquery',
-      imagesLoaded: 'imagesLoaded',
       velocity: 'velocity-animate'
     })
   ]
