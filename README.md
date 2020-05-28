@@ -106,6 +106,9 @@ ejsの構成変更
 babel-polyfillを削除。代わりにcore-jsを追加。  
 パッケージからjquery・imagesloadedを削除。
 
+### ver 11.0.3
+パッケージのバージョン更新
+
 #### ローカル開発用ソースのビルド
 
 ```
