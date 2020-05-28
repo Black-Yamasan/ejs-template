@@ -27,7 +27,7 @@ const config = {
   }
 }
 const options = minimist(process.argv.slice(2), config);
-let isProd = (options.env === 'prod') ? true : false;
+const isProd = (options.env === 'prod') ? true : false;
 console.log('[build env]', options.env, '[isProd]', isProd);
 
 const webpackConfig = require('./webpack.config');
