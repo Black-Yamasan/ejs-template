@@ -1,4 +1,3 @@
-// const sampleCalc = require('../plugins/_sampleCalc');
 import { sampleCalc } from '@/js/plugins/_sampleCalc';
 
 test('1 + 2 = 3', () => {
