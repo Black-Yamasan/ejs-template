@@ -2,7 +2,6 @@
  * fileName: sampleCalc
  */
 
-function sampleCalc(a,b) {
+export const sampleCalc = (a, b) => {
   return a + b;
 }
-module.exports = sampleCalc;
