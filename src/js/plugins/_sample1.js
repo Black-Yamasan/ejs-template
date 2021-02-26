@@ -3,9 +3,5 @@
 **/
 
 export default class sample1 {
-  constructor() {
-    ;(($ => {
-      console.log('sample1');
-    }))(jQuery);
-  };
+  constructor() {}
 };
