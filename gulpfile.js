@@ -52,7 +52,7 @@ gulp.task('sass', () => {
       path.dirname = 'assets/css'
     }))
     .pipe(autoprefixer({
-      overrideBrowserslist: ['last 2 version', 'iOS >= 11', 'Android >= 5'],
+      overrideBrowserslist: ['last 2 version'],
       cascade: false
     }))
     .pipe(gulpif(isProd, cleanCss()))

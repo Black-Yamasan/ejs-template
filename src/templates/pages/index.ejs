@@ -1,14 +1,12 @@
 <%_
-  const ROOT = ''
-  const PAGE_ID = 'index'
-  const TITLE = 'index page'
-  const DESCRIPTION = 'index page description'
-  const CSS_FILE = ['index']
-  const JS_FILE = ['index']
+  const PageOptions = {
+    root: '',
+    title: 'index page',
+    description: '',
+    cssFiles: ['index'],
+    scriptFiles: ['index']
+  }
 _%>
-<%_ include ../include/_header _%>
-      <div class="maincolumn">
-        <p>hello world</p>
-      </div>
-<%_ include ../components/_sidebar _%>
-<%_ include ../include/_footer _%>
+<%- include( '../include/_header', { PageOptions } ) -%>
+
+<%- include( '../include/_footer', { PageOptions } ) -%>
