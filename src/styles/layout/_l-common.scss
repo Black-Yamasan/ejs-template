@@ -11,7 +11,6 @@ body {
   margin: 0;
   padding: 0;
   min-width: 1000px;
-  letter-spacing: 1.2px;
   overflow: hidden;
   -webkit-text-size-adjust: 100%;
   box-sizing: border-box;
@@ -43,80 +42,4 @@ a:hover img {
 /* clearfix */
 .clearfix {
   @include clearfix;
-}
-
-/* -----------------------------------------
-  00:style
------------------------------------------- */
-
-/* -----margin----- */
-$value: 80;
-@while $value > 0 {
-  .mb#{$value} {
-    @include marginBottom($value);
-  }
-  $value: $value - 5;
-}
-
-.mr0 {
-  @include marginRight(0);
-}
-
-/* -----float----- */
-.fl_l {
-  float: left;
-}
-
-.fl_r {
-  float: right;
-}
-
-.cl_both {
-  clear: both;
-}
-
-/* -----font----- */
-.fw_b {
-  font-weight: bold;
-}
-
-.ta_r {
-  text-align: right;
-}
-
-.ta_c {
-  text-align: center;
-}
-
-.ta_l {
-  text-align: left;
-}
-
-.f_min {
-  font-family: $FONT_MIN;
-}
-
-$value: 20;
-@while $value > 10 {
-  .fs#{$value} {
-    @include fontSize($value);
-  }
-  $value: $value - 1;
-}
-
-#pagetop {
-  position: fixed;
-  right: 30px;
-  bottom: 30px;
-}
-
-.container {
-  width: 900px;
-  margin: 0 auto 50px auto;
-  overflow: hidden;
-}
-
-.maincolumn {
-  float: left;
-  width: 680px;
 }
