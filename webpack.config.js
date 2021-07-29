@@ -64,8 +64,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.ProvidePlugin({
-      velocity: 'velocity-animate'
-    })
+    new webpack.ProvidePlugin({})
   ]
 };
