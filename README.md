@@ -151,10 +151,14 @@ gulp sp：SPのビルドと監視
 - サンプルejsファイル更新
 - SCSSのコード一部削除・画像ファイル削除
 
-### ver 12.0.01
+### ver 12.0.1
 
 - webpackのバージョンを5系にアップデート
 - core-js削除
+
+### ver 12.0.2
+
+- sass, gulp-sass, webpack, jest, babelのバージョンアップデート
 
 #### ローカル開発用ソースのビルド
 
