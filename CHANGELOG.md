@@ -1,3 +1,7 @@
+## ver 12.0.3
+
+- Nodeのバージョンを14系に変更
+
 ## ver 12.0.2
 
 - sass, gulp-sass, webpack, jest, babelのバージョンアップデート
