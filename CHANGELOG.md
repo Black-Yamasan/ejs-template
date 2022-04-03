@@ -1,3 +1,8 @@
+## ver 12.0.4
+
+- webpack, glob, browser-sync のバージョンアップデート
+- minimist 削除
+
 ## ver 12.0.3
 
 - Nodeのバージョンを14系に変更
