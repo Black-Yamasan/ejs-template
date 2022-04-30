@@ -14,7 +14,6 @@ const browserSync = require('browser-sync').create();
 const runSequence = require('gulp4-run-sequence');
 const webpackStream = require('webpack-stream');
 const webpack = require('webpack');
-const path = require('path');
 const destDir = './dist/';
 const prodDir = './htdocs/';
 const config = {
@@ -24,7 +23,7 @@ const config = {
   }
 }
 const options = minimist(process.argv.slice(2), config);
-const isProd = (options.env === 'prod') ? true : false;
+const isProd = options.env === 'prod'
 console.log('[build env]', options.env, '[isProd]', isProd);
 
 const webpackConfig = require('./webpack.config');
@@ -103,7 +102,7 @@ gulp.task('default', gulp.series(
         'bs-reload'
       );
     });
-    watch(['src/common/js/**/*.js', 'src/js/**/*.js'], () => {
+    watch(['src/js/**/*.js'], () => {
       return runSequence(
         'webpack',
         'bs-reload'

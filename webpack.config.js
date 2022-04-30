@@ -12,8 +12,8 @@ const config = {
   }
 }
 const options = minimist(process.argv.slice(2), config);
-const isProd = (options.env === 'prod') ? true : false;
-const modeValue = ( isProd ) ? 'production' : 'development';
+const isProd = options.env === 'prod'
+const modeValue = isProd ? 'production' : 'development';
 
 
 glob.sync('./src/**/*.js', {
