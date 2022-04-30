@@ -1,3 +1,8 @@
+## ver 12.1.0
+
+- npmのバージョンを8系に更新
+- svg関連のタスクを削除
+
 ## ver 12.0.4
 
 - webpack, glob, browser-sync のバージョンアップデート
