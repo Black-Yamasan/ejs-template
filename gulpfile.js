@@ -14,7 +14,6 @@ const browserSync = require('browser-sync').create();
 const runSequence = require('gulp4-run-sequence');
 const webpackStream = require('webpack-stream');
 const webpack = require('webpack');
-const cheerio = require('gulp-cheerio');
 const path = require('path');
 const destDir = './dist/';
 const prodDir = './htdocs/';
