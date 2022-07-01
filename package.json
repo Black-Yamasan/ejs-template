@@ -28,9 +28,6 @@
     "gulp4-run-sequence": "0.2.1",
     "jest": "27.4.7",
     "node-sass": "7.0.1",
-    "stylelint": "14.9.1",
-    "stylelint-config-standard": "18.3.0",
-    "stylelint-scss": "4.2.0",
     "terser-webpack-plugin": "5.1.4",
     "webpack": "5.69.1",
     "webpack-stream": "7.0.0"
@@ -39,7 +36,6 @@
     "dev": "npx gulp build --env dev",
     "prod": "npx gulp build --env prod",
     "start": "npx gulp",
-    "lint:style": "stylelint --fix src/**/*.scss",
     "test": "jest"
   },
   "repository": {
