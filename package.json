@@ -28,7 +28,7 @@
     "gulp4-run-sequence": "0.2.1",
     "jest": "27.4.7",
     "node-sass": "7.0.1",
-    "stylelint": "10.1.0",
+    "stylelint": "14.9.1",
     "stylelint-config-standard": "18.3.0",
     "stylelint-scss": "3.9.1",
     "terser-webpack-plugin": "5.1.4",
