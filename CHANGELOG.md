@@ -1,3 +1,12 @@
+## ver 12.2.0
+
+- webpack-stream, glob, gulp-notify バージョンアップデート
+- stylelint 削除
+- reset.scss 更新
+- src/templates/include/_header.ejs 更新 meta http-equivを削除
+- ビルドコマンド変更
+- README更新
+
 ## ver 12.1.1
 
 - Node.jsのバージョンを16系に変更
