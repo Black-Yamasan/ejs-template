@@ -1,3 +1,9 @@
+## ver 13.0.0
+
+- ビルドコマンド修正
+- scssのビルドをgulpからwebpackに変更
+- src/以下のJavaScriptのディレクトリを変更
+
 ## ver 12.2.0
 
 - webpack-stream, glob, gulp-notify バージョンアップデート
