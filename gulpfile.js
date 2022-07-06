@@ -55,12 +55,6 @@ gulp.task('ejs', () => {
     .pipe(gulpif(isProd, gulp.dest(prodDir)))
 })
 
-gulp.task('images', () => {
-  return gulp.src(['src/images/**/*'])
-    .pipe(gulpif(!isProd, gulp.dest(destDir + 'assets/images/')))
-    .pipe(gulpif(isProd, gulp.dest(prodDir + 'assets/images/')))
-})
-
 gulp.task('bs-reload', () => {
   browserSync.reload()
 })
@@ -68,11 +62,11 @@ gulp.task('bs-reload', () => {
 gulp.task('clean', del.bind(null, prodDir))
 
 gulp.task('build', gulp.series(
-  gulp.parallel('webpack', 'ejs', 'images')
+  gulp.parallel('webpack', 'ejs')
 ))
 
 gulp.task('default', gulp.series(
-  gulp.parallel('browser-sync', 'webpack', 'ejs', 'images', () => {
+  gulp.parallel('browser-sync', 'webpack', 'ejs', () => {
     watch(['src/scripts/**/*.js'], () => {
       return runSequence(
         'webpack',
@@ -93,7 +87,7 @@ gulp.task('default', gulp.series(
     })
     watch(['src/images/**/*'], () => {
       return runSequence(
-        'images',
+        'webpack',
         'bs-reload'
       )
     })

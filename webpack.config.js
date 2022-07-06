@@ -4,9 +4,10 @@ const path = require('path')
 const glob = require('glob')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts')
+const CopyPlugin = require('copy-webpack-plugin')
+const minimist = require('minimist')
 
 const entries = {}
-const minimist = require('minimist')
 const config = {
   string: 'env',
   default: {
@@ -16,7 +17,13 @@ const config = {
 const options = minimist(process.argv.slice(2), config)
 const isProd = options.env === 'prod'
 const modeValue = isProd ? 'production' : 'development'
+const srcImageDir = path.resolve(__dirname, `./src/images/**/*`)
 
+const plugins = [
+  new webpack.ProvidePlugin({}),
+  new RemoveEmptyScriptsPlugin({ remove: /(?<!\.rem)\.(js|mjs)$/ }),
+  new MiniCssExtractPlugin({})
+]
 
 glob.sync('./src/scripts/**/*.js', {
   ignore: './src/scripts/**/_*.js'
@@ -33,6 +40,20 @@ glob.sync('./src/styles/**/*.scss', {
   const key = file.replace(regExp, 'assets/css/').replace(/\.scss/, '')
   entries[key] = [file]
 })
+
+if (glob.sync(srcImageDir).length > 0) {
+  plugins.push(
+    new CopyPlugin({
+      patterns: [
+        {
+          from: srcImageDir,
+          context: path.resolve(__dirname, 'src', 'images'),
+          to: path.resolve(__dirname, `assets/images`)
+        }
+      ]
+    })
+  )
+}
 
 module.exports = {
   entry: entries,
@@ -92,11 +113,7 @@ module.exports = {
       })
     ]
   },
-  plugins: [
-    new webpack.ProvidePlugin({}),
-    new RemoveEmptyScriptsPlugin({ remove: /(?<!\.rem)\.(js|mjs)$/ }),
-    new MiniCssExtractPlugin({}),
-  ],
+  plugins: plugins,
   resolve: {
     extensions: ['.js'],
     alias: {
