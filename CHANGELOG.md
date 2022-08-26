@@ -1,3 +1,7 @@
+## ver 13.0.2
+
+- webpack, terser-webpack-plugin バージョンアップデート
+
 ## ver 13.0.1
 
 - 画像ファイルのコピーをgulpからwebpackに変更
