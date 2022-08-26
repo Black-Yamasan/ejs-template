@@ -5,27 +5,43 @@ const glob = require('glob')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts')
 const CopyPlugin = require('copy-webpack-plugin')
-const minimist = require('minimist')
+
+const constants = require('./webpack-extensions/constants')
+const isProd = constants.isProd
+const modeValue = constants.modeValue
+const OUTPUT_DIR = constants.OUTPUT_DIR
+const SRC_SCRIPT_DIR = constants.SRC_SCRIPT_DIR
+const SRC_STYLE_DIR = constants.SRC_STYLE_DIR
+const SRC_EJS_DIR = constants.SRC_EJS_DIR
+const SRC_IMAGE_DIR = constants.SRC_IMAGE_DIR
+const PORT = constants.PORT
 
 const entries = {}
-const config = {
-  string: 'env',
-  default: {
-    env: process.env.NODE_ENV || 'dev'
-  }
-}
-const options = minimist(process.argv.slice(2), config)
-const isProd = options.env === 'prod'
-const modeValue = isProd ? 'production' : 'development'
-const srcImageDir = path.resolve(__dirname, `./src/images/**/*`)
-
 const plugins = [
   new webpack.ProvidePlugin({}),
   new RemoveEmptyScriptsPlugin({ remove: /(?<!\.rem)\.(js|mjs)$/ }),
-  new MiniCssExtractPlugin({})
+  new MiniCssExtractPlugin({}),
+  compiler => {
+    compiler.hooks.compilation.tap('Compile', compilation => {
+      compilation.hooks.processAssets.tap(
+        {
+          name: 'Compile',
+          stage: ''
+        },
+        (files) => {
+          Object.keys(files).forEach((fileName) => {
+            const isMatchRemoveFileName = !fileName.includes('assets') && fileName.includes('.js')
+            if (isMatchRemoveFileName) {
+              compilation.deleteAsset(fileName)
+            }
+          })
+        }
+      )
+    })
+  }
 ]
 
-glob.sync('./src/scripts/**/*.js', {
+glob.sync(SRC_SCRIPT_DIR, {
   ignore: './src/scripts/**/_*.js'
 }).map((file) => {
   const regExp = new RegExp(`./src/scripts/`)
@@ -33,7 +49,7 @@ glob.sync('./src/scripts/**/*.js', {
   entries[key] = [file]
 })
 
-glob.sync('./src/styles/**/*.scss', {
+glob.sync(SRC_STYLE_DIR, {
   ignore: './src/styles/**/_*.scss'
 }).map((file) => {
   const regExp = new RegExp(`./src/styles/pages/`)
@@ -41,12 +57,20 @@ glob.sync('./src/styles/**/*.scss', {
   entries[key] = [file]
 })
 
-if (glob.sync(srcImageDir).length > 0) {
+glob.sync(SRC_EJS_DIR, {
+  ignore: './src/templates/**/_*.ejs'
+}).map((file) => {
+  const regExp = new RegExp(`./src/templates/pages/`)
+  const key = file.replace(regExp, '').replace(/\.ejs/, '')
+  entries[key] = [file]
+})
+
+if (glob.sync(SRC_IMAGE_DIR).length > 0) {
   plugins.push(
     new CopyPlugin({
       patterns: [
         {
-          from: srcImageDir,
+          from: SRC_IMAGE_DIR,
           context: path.resolve(__dirname, 'src', 'images'),
           to: path.resolve(__dirname, `assets/images`)
         }
@@ -59,9 +83,25 @@ module.exports = {
   entry: entries,
   mode: modeValue,
   output: {
-    path: path.resolve(__dirname, '')
+    path: path.resolve(__dirname, OUTPUT_DIR),
+    clean: true
   },
   devtool: !isProd ? 'inline-source-map' : false,
+  devServer: {
+    static: {
+      directory: path.join(__dirname, OUTPUT_DIR),
+    },
+    historyApiFallback: true,
+    watchFiles: {
+      paths: ['./src/**/*']
+    },
+    compress: isProd,
+    port: PORT,
+    hot: true
+  },
+  watchOptions: {
+    ignored: '**/node_modules',
+  },
   module: {
     rules: [
       {
@@ -93,6 +133,15 @@ module.exports = {
           }
         ],
         exclude: /node_modules/
+      },
+      {
+        test: /\.ejs$/i,
+        use: [
+          {
+            loader: path.resolve(__dirname, 'webpack-extensions/ejs-loader/index.js')
+          }
+        ],
+        exclude: /node_modules/
       }
     ]
   },
@@ -117,7 +166,7 @@ module.exports = {
   resolve: {
     extensions: ['.js'],
     alias: {
-      '@': path.resolve(__dirname, 'src'),
+      '@': path.resolve(__dirname, 'src')
     }
   }
 }

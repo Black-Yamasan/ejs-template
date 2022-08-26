@@ -9,7 +9,10 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE">
 <%_ for ( var i = 0; i < PageOptions.cssFiles.length; i++ ) { _%>
-<link href="<%= PageOptions.root %>assets/css/<%= PageOptions.cssFiles[i] %>.css" rel="stylesheet">
+<link href="/assets/css/<%= PageOptions.cssFiles[i] %>.css" rel="stylesheet">
+<%_ } _%>
+<%_ for ( var i = 0; i < PageOptions.scriptFiles.length; i++ ) { _%>
+<script defer type="text/javascript" src="/assets/js/<%= PageOptions.scriptFiles[i] %>.js"></script>
 <%_ } _%>
 </head>
 
