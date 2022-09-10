@@ -1,3 +1,8 @@
+## ver 14.0.0
+
+- gulpを削除、ejsのコンパイルをwebpackに移行
+- browser-sync を削除
+
 ## ver 13.0.2
 
 - webpack, terser-webpack-plugin バージョンアップデート

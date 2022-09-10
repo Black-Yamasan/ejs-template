@@ -1,6 +1,6 @@
 {
   "name": "ejs_template",
-  "version": "13.0.2",
+  "version": "14.0.0",
   "description": "ejsでのテンプレート",
   "main": "index.js",
   "engines": {
@@ -41,8 +41,10 @@
   },
   "keywords": [
     "npm",
+    "yarn",
     "install",
-    "--save-dev"
+    "--save-dev",
+    "webpack"
   ],
   "author": "Black-Yamasan",
   "license": "MIT",
