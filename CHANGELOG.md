@@ -1,3 +1,10 @@
+## ver 14.0.1
+
+- node-sass, postcss-loader, terser-webpack-plugin, webpack-remove-empty-scripts, webpack-dev-server, webpack バージョンアップデート
+- del 削除
+- scssファイル整理
+- サンプルのjsファイル整理
+
 ## ver 14.0.0
 
 - gulpを削除、ejsのコンパイルをwebpackに移行
