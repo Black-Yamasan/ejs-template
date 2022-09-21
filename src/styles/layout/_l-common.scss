@@ -1,13 +1,11 @@
-/* --HTML-- */
 html {
   color: $FONT_COLOR;
   overflow-y: scroll;
 }
 
-/* --BODY-- */
 body {
   font-size: $FONT_SIZE;
-  font-family: $FONT_MEIRIO;
+  font-family: $FONT_FAMILY;
   margin: 0;
   padding: 0;
   min-width: 1000px;
@@ -21,25 +19,4 @@ body {
 img {
   vertical-align: bottom;
   border: none;
-}
-
-/* --OTHER TAGS-- */
-a {
-  overflow: hidden;
-  outline: none;
-  text-decoration: none;
-}
-
-a img {
-  background: none;
-  border: none;
-}
-
-a:hover img {
-  opacity: 0.6;
-}
-
-/* clearfix */
-.clearfix {
-  @include clearfix;
 }
