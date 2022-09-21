@@ -24,7 +24,7 @@
     "terser-webpack-plugin": "5.3.6",
     "webpack": "5.69.1",
     "webpack-cli": "4.10.0",
-    "webpack-dev-server": "4.10.0",
+    "webpack-dev-server": "4.11.1",
     "webpack-remove-empty-scripts": "1.0.1",
     "webpack-stream": "7.0.0"
   },
