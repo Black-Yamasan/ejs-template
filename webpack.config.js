@@ -91,11 +91,9 @@ module.exports = {
     static: {
       directory: path.join(__dirname, OUTPUT_DIR),
     },
-    historyApiFallback: true,
     watchFiles: {
       paths: ['./src/**/*']
     },
-    compress: isProd,
     port: PORT,
     hot: true
   },
