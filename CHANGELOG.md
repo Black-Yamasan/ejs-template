@@ -1,3 +1,7 @@
+## ver 14.0.2
+
+- babel-loader, sass-loader, @babel/preset-env, jest バージョンアップデート
+
 ## ver 14.0.1
 
 - node-sass, postcss-loader, terser-webpack-plugin, webpack-remove-empty-scripts, webpack-dev-server, webpack バージョンアップデート
