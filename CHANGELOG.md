@@ -1,3 +1,7 @@
+## ver 14.0.3
+
+- node-sass, css-loader, babel-loader, wepack, webpack-cli, webpack-dev-server, jest バージョンアップデート
+
 ## ver 14.0.2
 
 - babel-loader, sass-loader, @babel/preset-env, jest バージョンアップデート
