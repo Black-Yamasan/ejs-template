@@ -1,3 +1,7 @@
+## ver 14.0.4
+
+- css-loader, postcss-loader, @babel/preset-env, mini-css-extract-plugin, mkdirp, sass-loader, terser-webpack-plugin, webpack, webpack-cli, webpack-dev-server, webpack-remove-empty-scripts バージョンアップデート
+
 ## ver 14.0.3
 
 - node-sass, css-loader, babel-loader, wepack, webpack-cli, webpack-dev-server, jest バージョンアップデート
