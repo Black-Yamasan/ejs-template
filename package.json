@@ -22,10 +22,17 @@
     "postcss-loader": "7.3.2",
     "sass-loader": "13.3.1",
     "terser-webpack-plugin": "5.3.9",
+<<<<<<< HEAD
     "webpack": "5.84.1",
     "webpack-cli": "5.1.1",
     "webpack-dev-server": "4.15.0",
     "webpack-remove-empty-scripts": "1.0.3",
+=======
+    "webpack": "5.76.3",
+    "webpack-cli": "5.0.0",
+    "webpack-dev-server": "4.13.1",
+    "webpack-remove-empty-scripts": "1.0.1",
+>>>>>>> parent of ce61d4c (modify: update webpack)
     "webpack-stream": "7.0.0"
   },
   "scripts": {
