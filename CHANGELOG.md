@@ -1,3 +1,7 @@
+## ver 14.0.7
+
+- @babel/preset-env バージョンアップデート
+
 ## ver 14.0.6
 
 - postcss-loader バージョンアップデート
