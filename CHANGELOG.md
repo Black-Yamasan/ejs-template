@@ -1,3 +1,7 @@
+## ver 14.0.6
+
+- postcss-loader バージョンアップデート
+
 ## ver 14.0.5
 
 - node-sass バージョンアップデート
