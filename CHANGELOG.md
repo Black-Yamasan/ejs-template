@@ -1,3 +1,7 @@
+## ver 14.1.0
+
+- node-sass 削除, sass 追加
+
 ## ver 14.0.8
 
 - Node.jsのバージョンを18系に更新
