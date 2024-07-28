@@ -10,9 +10,6 @@ const constants = require('./webpack-extensions/constants')
 const isProd = constants.isProd
 const modeValue = constants.modeValue
 const OUTPUT_DIR = constants.OUTPUT_DIR
-const SRC_SCRIPT_DIR = constants.SRC_SCRIPT_DIR
-const SRC_STYLE_DIR = constants.SRC_STYLE_DIR
-const SRC_EJS_DIR = constants.SRC_EJS_DIR
 const SRC_IMAGE_DIR = constants.SRC_IMAGE_DIR
 const PORT = constants.PORT
 
@@ -41,28 +38,41 @@ const plugins = [
   }
 ]
 
-glob.sync(SRC_SCRIPT_DIR, {
-  ignore: './src/scripts/**/_*.js'
+glob.sync('./src/scripts/**/*.js', {
+  ignore: {
+    ignored: (path) => {
+      const parent = path.parent
+      return parent.name === 'plugins'
+    }
+  }
 }).map((file) => {
-  const regExp = new RegExp(`./src/scripts/`)
+  const regExp = new RegExp(`src/scripts/`)
   const key = file.replace(regExp, 'assets/js/').replace(/\.js/, '')
-  entries[key] = [file]
+  entries[key] = `./${file}`
 })
 
-glob.sync(SRC_STYLE_DIR, {
-  ignore: './src/styles/**/_*.scss'
+glob.sync('./src/styles/**/*.scss', {
+  ignore: {
+    ignored: (path) => {
+      return path.name.startsWith('_')
+    }
+  }
 }).map((file) => {
-  const regExp = new RegExp(`./src/styles/pages/`)
+  const regExp = new RegExp(`src/styles/pages/`)
   const key = file.replace(regExp, 'assets/css/').replace(/\.scss/, '')
-  entries[key] = [file]
+  entries[key] = `./${file}`
 })
 
-glob.sync(SRC_EJS_DIR, {
-  ignore: './src/templates/**/_*.ejs'
+glob.sync('./src/templates/**/*.ejs', {
+  ignore: {
+    ignored: (path) => {
+      return path.name.startsWith('_')
+    }
+  }
 }).map((file) => {
-  const regExp = new RegExp(`./src/templates/pages/`)
+  const regExp = new RegExp(`src/templates/pages/`)
   const key = file.replace(regExp, '').replace(/\.ejs/, '')
-  entries[key] = [file]
+  entries[key] = `./${file}`
 })
 
 if (glob.sync(SRC_IMAGE_DIR).length > 0) {
