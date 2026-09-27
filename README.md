@@ -1,52 +1,60 @@
 # ejs-template
+
 テンプレートエンジン「EJS」を使用したテンプレート
 
+## Requirements
+
+- Node.js: `24.13.0`
+- pnpm: `12.5.1`
+
 ## commands
+
+### install
+
+```bash
+pnpm i
+```
 
 ### build for development
 
 ```bash
-npm run build:dev
-```
-
-or
-
-```bash
-yarn run build:dev
+pnpm build:dev
 ```
 
 ### build for production
 
 ```bash
-npm run build:prod
-```
-
-or
-
-```bash
-yarn run build:prod
+pnpm build:prod
 ```
 
 ### run server for development
 
 ```bash
-npm run start
-```
-
-or
-
-```bash
-yarn run start
+pnpm start
 ```
 
 ### run test for javascript
 
 ```bash
-npm run test
+pnpm test
 ```
 
-or
+### format
+
+#### check
 
 ```bash
-yarn run test
+pnpm prettier:check
+```
+
+#### write
+
+```bash
+pnpm prettier:writer
+```
+
+### eslint
+
+```bash
+pnpm lint
 ```
