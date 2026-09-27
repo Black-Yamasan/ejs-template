@@ -28,8 +28,7 @@
     "webpack": "5.97.1",
     "webpack-cli": "5.1.4",
     "webpack-dev-server": "5.0.4",
-    "webpack-remove-empty-scripts": "1.1.1",
-    "webpack-stream": "7.0.0"
+    "webpack-remove-empty-scripts": "1.1.1"
   },
   "scripts": {
     "build:dev": "NODE_ENV=development npx webpack --target node",
