@@ -4,7 +4,7 @@ import { defineConfig, globalIgnores } from "eslint/config";
 
 export default defineConfig([
   {
-    files: ["src/**/*.{js}", '**/*.mjs'],
+    files: ["src/**/*.js", '**/*.mjs'],
     plugins: { js }, extends: ["js/recommended"], languageOptions: { globals: globals.browser }
   },
   globalIgnores([
