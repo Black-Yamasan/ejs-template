@@ -4,11 +4,11 @@
   "description": "ejsでのテンプレート",
   "main": "index.js",
   "engines": {
-    "node": "24.x",
-    "npm": "11.x"
+    "node": "24.x"
   },
   "volta": {
-    "node": "24.13.0"
+    "node": "24.13.0",
+    "pnpm": "12.5.1"
   },
   "dependencies": {},
   "devDependencies": {
@@ -41,8 +41,7 @@
     "url": "git+https://github.com/Black-Yamasan/ejs-template.git"
   },
   "keywords": [
-    "npm",
-    "yarn",
+    "pnpm",
     "install",
     "--save-dev",
     "webpack"
