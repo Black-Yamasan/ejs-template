@@ -5,3 +5,5 @@ htdocs/*
 npm-debug.log
 src/pc/images/*
 src/sp/images/*
+
+.vscode/
