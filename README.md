@@ -50,7 +50,7 @@ pnpm prettier:check
 #### write
 
 ```bash
-pnpm prettier:writer
+pnpm prettier:write
 ```
 
 ### eslint

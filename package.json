@@ -58,7 +58,7 @@
     "test": "jest",
     "lint": "eslint",
     "prettier:check": "prettier -c ./src/**/*",
-    "prettier:writer": "prettier --write ./src/**/*"
+    "prettier:write": "prettier --write ./src/**/*"
   },
   "repository": {
     "type": "git",
