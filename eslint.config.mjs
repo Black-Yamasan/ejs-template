@@ -1,15 +1,15 @@
-let customConfig = [];
-let hasIgnoresFile = false;
-try {
-  require.resolve('./eslint.ignores.js');
-  hasIgnoresFile = true;
-} catch {
-  // eslint.ignores.js doesn't exist
-}
+import js from "@eslint/js";
+import globals from "globals";
+import { defineConfig, globalIgnores } from "eslint/config";
 
-if (hasIgnoresFile) {
-  const ignores = require('./eslint.ignores.js');
-  customConfig = [{ignores}];
-}
-
-module.exports = [...customConfig, ...require('gts')];
+export default defineConfig([
+  {
+    files: ["src/**/*.{js}", '**/*.mjs'],
+    plugins: { js }, extends: ["js/recommended"], languageOptions: { globals: globals.browser }
+  },
+  globalIgnores([
+    'node_modules',
+    'dist/**',
+    'htdocs/**'
+  ])
+]);

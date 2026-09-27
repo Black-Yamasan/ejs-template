@@ -1,7 +1,7 @@
 /**
-* Name: sample1
-**/
+ * Name: sample1
+ **/
 
 export default class sample1 {
   constructor() {}
-};
+}
