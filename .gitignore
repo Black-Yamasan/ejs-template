@@ -1,9 +1,11 @@
 .DS_Store
 node_modules
-dist/*
-htdocs/*
+dist/
+htdocs/
+build/
 npm-debug.log
 src/pc/images/*
 src/sp/images/*
 
 .vscode/
+tsconfig.tsbuildinfo
