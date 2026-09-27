@@ -1,6 +1,6 @@
 {
   "name": "ejs_template",
-  "version": "15.0.1",
+  "version": "16.0.0",
   "description": "ejsでのテンプレート",
   "main": "index.js",
   "engines": {
