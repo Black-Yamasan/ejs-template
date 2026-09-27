@@ -1,11 +1,10 @@
-@import '../config';
-@import '../reset';
+@use '../variables/colors' as Colors;
+@use '../variables/easing' as Easing;
 
-@import '../mixin/easing';
+@use '../root';
+@use '../reset';
+@use '../global';
 
-@import '../components/header';
-@import '../components/footer';
-@import '../components/sidebar';
-
-@import '../layout/l-common';
-@import '../layout/l-index';
+@use '../components/header';
+@use '../components/footer';
+@use '../components/sidebar';

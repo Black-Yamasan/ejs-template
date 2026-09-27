@@ -1,0 +1,12 @@
+@use './variables/colors' as Colors;
+
+:root {
+  /* ui color */
+  --color-gray-01: #{Colors.$gray-01};
+
+  /* font color */
+  --color-text-default: var(--color-gray-01);
+
+  /* font family */
+  --font-family-base: "メイリオ","ＭＳ Ｐゴシック";
+}

@@ -1,14 +1,16 @@
+@use "sass:math";
+
 html {
-  color: $FONT_COLOR;
   overflow-y: scroll;
 }
 
 body {
-  font-size: $FONT_SIZE;
-  font-family: $FONT_FAMILY;
+  font-size: math.percentage(math.div(10, 16));
+  font-family: var(--font-family-base);
   margin: 0;
   padding: 0;
-  min-width: 1000px;
+  color: var(--color-text-default);
+  min-width: 1024px;
   overflow: hidden;
   -webkit-text-size-adjust: 100%;
   box-sizing: border-box;
