@@ -1,3 +1,8 @@
+## ver 17.0.0
+
+- SCSSからCSSに変更
+- sass, sass-loader, sass-migrator, postcss-loaderを削除
+
 ## ver 16.0.0
 
 - mkdirp, webpack-streamを削除
