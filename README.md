@@ -55,6 +55,8 @@ pnpm prettier:write
 
 ### eslint
 
+※ typescript-eslint対応後に利用できるように修正予定
+
 ```bash
 pnpm lint
 ```
