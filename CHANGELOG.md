@@ -1,3 +1,8 @@
+## ver 18.0.0
+
+- アプリケーションのスクリプトファイルをJavaScriptファイルからTypeScriptに変更
+- babel-loader, @babel/preset-env を削除
+
 ## ver 17.0.0
 
 - SCSSからCSSに変更

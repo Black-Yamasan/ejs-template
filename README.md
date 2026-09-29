@@ -5,7 +5,7 @@
 ## Requirements
 
 - Node.js: `24.13.0`
-- pnpm: `12.5.1`
+- pnpm: `12.x`
 
 ## commands
 
