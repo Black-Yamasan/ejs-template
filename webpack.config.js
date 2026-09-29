@@ -40,7 +40,7 @@ const plugins = [
 ]
 
 glob
-  .sync('./src/scripts/**/*.js', {
+  .sync('./src/scripts/**/*.ts', {
     ignore: {
       ignored: (path) => {
         const parent = path.parent
@@ -50,7 +50,7 @@ glob
   })
   .map((file) => {
     const regExp = new RegExp(`src/scripts/`)
-    const key = file.replace(regExp, 'assets/js/').replace(/\.js/, '')
+    const key = file.replace(regExp, 'assets/scripts/').replace(/\.ts/, '')
     entries[key] = `./${file}`
   })
 
@@ -112,6 +112,14 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.ts$/,
+        use: [
+          {
+            loader: 'ts-loader'
+          }
+        ]
+      },
+      {
         test: /\.js$/,
         use: [
           {
@@ -168,7 +176,7 @@ module.exports = {
   },
   plugins: plugins,
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.js', '.ts'],
     alias: {
       '@': path.resolve(__dirname, 'src')
     }
