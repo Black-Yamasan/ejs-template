@@ -163,7 +163,7 @@ module.exports = {
   },
   plugins: plugins,
   resolve: {
-    extensions: ['.ts'],
+    extensions: ['.ts', '.js'],
     alias: {
       '@': path.resolve(__dirname, 'src')
     }
