@@ -34,10 +34,20 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
     "allowJs": true,
+    "moduleResolution": "nodenext",
     "paths": {
       "@/*": [
         "./src/*"
       ]
     },
-  }
+  },
+  "include": [
+    "src/scripts/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "htdocs",
+    "__test__"
+  ]
 }

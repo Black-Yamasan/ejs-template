@@ -43,8 +43,7 @@ glob
   .sync('./src/scripts/**/*.ts', {
     ignore: {
       ignored: (path) => {
-        const parent = path.parent
-        return parent.name === 'plugins'
+        return path.name.startsWith('_')
       }
     }
   })
@@ -115,7 +114,7 @@ module.exports = {
         test: /\.ts$/,
         use: [
           {
-            loader: 'ts-loader'
+            loader: 'esbuild-loader'
           }
         ]
       },
