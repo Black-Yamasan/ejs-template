@@ -1,6 +1,7 @@
 allowBuilds:
   -D: true
   '@parcel/watcher@2.6.0': true
+  '@swc/core': false
   esbuild: false
   unrs-resolver: set this to true or false
   unrs-resolver@1.12.2: true

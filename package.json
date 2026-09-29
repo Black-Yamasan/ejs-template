@@ -10,27 +10,14 @@
     "node": "24.13.0",
     "pnpm": "12.5.1"
   },
-  "jest": {
-    "moduleNameMapper": {
-      "^@/(.*)$": "<rootDir>/src/$1"
-    },
-    "moduleFileExtensions": [
-      "js",
-      "json"
-    ],
-    "transform": {
-      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
-    },
-    "collectCoverage": false,
-    "collectCoverageFrom": [
-      "src/**/*.{js}",
-      "!**/node_modules/**"
-    ]
-  },
   "devDependencies": {
     "@babel/preset-env": "8.0.5",
     "@eslint/js": "10.0.1",
+    "@swc/core": "1.16.2",
+    "@swc/jest": "0.2.39",
+    "@types/jest": "29.5.14",
     "@types/node": "24.13.6",
+    "babel-jest": "30.5.2",
     "babel-loader": "10.1.1",
     "copy-webpack-plugin": "14.0.0",
     "css-loader": "7.1.5",

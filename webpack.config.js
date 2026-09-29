@@ -17,7 +17,7 @@ const PORT = constants.PORT
 const entries = {}
 const plugins = [
   new webpack.ProvidePlugin({}),
-  new RemoveEmptyScriptsPlugin({ remove: /(?<!\.rem)\.(js|mjs)$/ }),
+  new RemoveEmptyScriptsPlugin({ remove: /(?<!\.rem)\.(js|ts|mjs)$/ }),
   new MiniCssExtractPlugin({}),
   (compiler) => {
     compiler.hooks.compilation.tap('Compile', (compilation) => {
@@ -118,18 +118,18 @@ module.exports = {
           }
         ]
       },
-      {
-        test: /\.js$/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: [['@babel/preset-env']]
-            }
-          }
-        ],
-        exclude: /node_modules/
-      },
+      // {
+      //   test: /\.js$/,
+      //   use: [
+      //     {
+      //       loader: 'babel-loader',
+      //       options: {
+      //         presets: [['@babel/preset-env']]
+      //       }
+      //     }
+      //   ],
+      //   exclude: /node_modules/
+      // },
       {
         test: /\.css$/i,
         use: [
@@ -175,7 +175,7 @@ module.exports = {
   },
   plugins: plugins,
   resolve: {
-    extensions: ['.js', '.ts'],
+    extensions: ['.ts'],
     alias: {
       '@': path.resolve(__dirname, 'src')
     }
