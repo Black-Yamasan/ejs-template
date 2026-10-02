@@ -9,3 +9,4 @@ src/sp/images/*
 
 .vscode/
 tsconfig.tsbuildinfo
+src/assets/

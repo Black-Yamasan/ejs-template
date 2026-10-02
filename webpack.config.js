@@ -13,6 +13,7 @@ const modeValue = constants.modeValue
 const OUTPUT_DIR = constants.OUTPUT_DIR
 const SRC_IMAGE_DIR = constants.SRC_IMAGE_DIR
 const PORT = constants.PORT
+const FAVICON_FILE_PATH = constants.FAVICON_FILE_PATH
 
 const entries = {}
 const plugins = [
@@ -79,8 +80,22 @@ if (glob.sync(SRC_IMAGE_DIR).length > 0) {
       patterns: [
         {
           from: SRC_IMAGE_DIR,
-          context: path.resolve(__dirname, 'src', 'images'),
-          to: path.resolve(__dirname, `assets/images`)
+          context: path.resolve(__dirname, 'src', 'assets/images'),
+          to: path.resolve(__dirname, OUTPUT_DIR, `assets/images`)
+        }
+      ]
+    })
+  )
+}
+
+if (glob.sync(FAVICON_FILE_PATH)) {
+  plugins.push(
+    new CopyPlugin({
+      patterns: [
+        {
+          from: FAVICON_FILE_PATH,
+          context: path.resolve(__dirname, 'src', 'assets'),
+          to: path.resolve(__dirname, OUTPUT_DIR)
         }
       ]
     })
