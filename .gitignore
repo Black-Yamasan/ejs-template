@@ -4,8 +4,6 @@ dist/
 htdocs/
 build/
 npm-debug.log
-src/pc/images/*
-src/sp/images/*
 
 .vscode/
 tsconfig.tsbuildinfo
