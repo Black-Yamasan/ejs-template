@@ -1,18 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
 <title><%= PageOptions.title %></title>
-<meta name="viewport" content="initial-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=yes">
-<meta content="<%= PageOptions.description %>" name="description">
-<meta content="" name="keywords">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta content="<%= PageOptions.description %>" name="description"/>
 <meta name="format-detection" content="telephone=no">
-<meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE">
+<meta property="og:type" content="<%= PageOptions.ogType %>"/>
+<meta property="og:title" content="<%= PageOptions.ogTitle %>"/>
+<meta property="og:description" content="<%= PageOptions.ogDescription %>"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="<%= PageOptions.ogTitle %>"/>
+<meta name="twitter:description" content="<%= PageOptions.ogDescription %>"/>
+<meta name="twitter:image" content="<%= PageOptions.ogImageUrl %>"/>
+<link rel="icon" href="favicon.ico" type="image/x-icon"/>
 <%_ for ( var i = 0; i < PageOptions.cssFiles.length; i++ ) { _%>
 <link href="/assets/css/<%= PageOptions.cssFiles[i] %>.css" rel="stylesheet">
 <%_ } _%>
 <%_ for ( var i = 0; i < PageOptions.scriptFiles.length; i++ ) { _%>
-<script defer type="text/javascript" src="/assets/scripts/<%= PageOptions.scriptFiles[i] %>.js"></script>
+<script defer src="/assets/scripts/<%= PageOptions.scriptFiles[i] %>.js"></script>
 <%_ } _%>
 </head>
 
