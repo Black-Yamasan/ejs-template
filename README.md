@@ -7,6 +7,37 @@
 - Node.js: `24.13.0`
 - pnpm: `12.x`
 
+## Files
+
+`src/` 以下を利用する。
+
+### Directories
+
+- `__test__/` テストコード用
+- `assets/images/` 画像ファイル用
+- `scripts/` スクリプトファイル(TypeScript)用
+- `styles/` cssファイル用
+- `templates/` ejsファイル用
+
+```bash
+├── src
+│   ├── __test__
+│   ├── assets
+│   │   ├── favicon.ico
+│   │   └── images
+│   ├── scripts
+│   │   ├── index.ts
+│   │   └── plugins
+│   ├── styles
+│   │   ├── components
+│   │   ├── global.css
+│   │   └── pages
+│   └── templates
+│       ├── components
+│       ├── include
+│       └── pages
+```
+
 ## commands
 
 ### install
