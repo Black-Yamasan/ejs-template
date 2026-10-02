@@ -1,3 +1,7 @@
+## ver 18.0.1
+
+- babel.config.jsを削除
+
 ## ver 18.0.0
 
 - アプリケーションのスクリプトファイルをJavaScriptファイルからTypeScriptに変更
