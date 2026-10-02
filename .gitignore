@@ -4,6 +4,7 @@ dist/
 htdocs/
 build/
 npm-debug.log
+.env.*
 
 .vscode/
 tsconfig.tsbuildinfo
