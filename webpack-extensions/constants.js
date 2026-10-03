@@ -1,18 +1,9 @@
-const path = require('path')
+import path from 'node:path'
 
-const isProd = process.env.NODE_ENV === 'production'
-const modeValue = isProd ? 'production' : 'development'
-const OUTPUT_DIR = isProd ? './htdocs' : './dist'
-const SRC_IMAGE_DIR = path.resolve(__dirname, `../src/assets/images/**/*`)
-const FAVICON_FILE_PATH = path.resolve(__dirname, '../src/assets/favicon.ico')
+export const isProd = process.env.NODE_ENV === 'production'
+export const modeValue = isProd ? 'production' : 'development'
+export const OUTPUT_DIR = isProd ? './htdocs' : './dist'
+export const SRC_IMAGE_DIR = path.resolve(path.dirname(''), `./src/assets/images/**/*`)
+export const FAVICON_FILE_PATH = path.resolve(path.dirname(''), './src/assets/favicon.ico')
 
-const PORT = 3000
-
-module.exports = {
-  isProd,
-  modeValue,
-  OUTPUT_DIR,
-  SRC_IMAGE_DIR,
-  PORT,
-  FAVICON_FILE_PATH
-}
+export const PORT = 3000

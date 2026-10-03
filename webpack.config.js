@@ -6,14 +6,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts')
 const CopyPlugin = require('copy-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
-const constants = require('./webpack-extensions/constants')
-
-const isProd = constants.isProd
-const modeValue = constants.modeValue
-const OUTPUT_DIR = constants.OUTPUT_DIR
-const SRC_IMAGE_DIR = constants.SRC_IMAGE_DIR
-const PORT = constants.PORT
-const FAVICON_FILE_PATH = constants.FAVICON_FILE_PATH
+const {
+  isProd,
+  modeValue,
+  OUTPUT_DIR,
+  SRC_IMAGE_DIR,
+  PORT,
+  FAVICON_FILE_PATH
+} = require('./webpack-extensions/constants')
 
 const entries = {}
 const plugins = [
