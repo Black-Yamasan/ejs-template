@@ -1,19 +1,19 @@
-const webpack = require('webpack')
-const TerserPlugin = require('terser-webpack-plugin')
-const path = require('path')
-const glob = require('glob')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts')
-const CopyPlugin = require('copy-webpack-plugin')
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
-const {
+import webpack from 'webpack'
+import TerserPlugin from 'terser-webpack-plugin'
+import path from 'node:path'
+import { globSync } from 'node:fs'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import RemoveEmptyScriptsPlugin from 'webpack-remove-empty-scripts'
+import CopyPlugin from 'copy-webpack-plugin'
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
+import {
   isProd,
   modeValue,
   OUTPUT_DIR,
   SRC_IMAGE_DIR,
   PORT,
   FAVICON_FILE_PATH
-} = require('./webpack-extensions/constants')
+} from './webpack-extensions/constants.js'
 
 const entries = {}
 const plugins = [
@@ -40,85 +40,82 @@ const plugins = [
   }
 ]
 
-glob
-  .sync('./src/scripts/**/*.ts', {
-    ignore: {
-      ignored: (path) => {
-        return path.name.startsWith('_')
-      }
+globSync('./src/scripts/**/*.ts', {
+  ignore: {
+    ignored: (path) => {
+      return path.name.startsWith('_')
     }
-  })
-  .map((file) => {
-    const regExp = new RegExp(`src/scripts/`)
-    const key = file.replace(regExp, 'assets/scripts/').replace(/\.ts/, '')
-    entries[key] = `./${file}`
-  })
+  }
+}).map((file) => {
+  const regExp = new RegExp(`src/scripts/`)
+  const key = file.replace(regExp, 'assets/scripts/').replace(/\.ts/, '')
+  entries[key] = `./${file}`
+})
 
-glob.sync('./src/styles/pages/**/*.css', {}).map((file) => {
+globSync('./src/styles/pages/**/*.css', {}).map((file) => {
   const regExp = new RegExp(`src/styles/pages/`)
   const key = file.replace(regExp, 'assets/css/').replace(/\.css/, '')
   entries[key] = `./${file}`
 })
 
-glob
-  .sync('./src/templates/**/*.ejs', {
-    ignore: {
-      ignored: (path) => {
-        return path.name.startsWith('_')
-      }
+globSync('./src/templates/**/*.ejs', {
+  ignore: {
+    ignored: (path) => {
+      return path.name.startsWith('_')
     }
-  })
-  .map((file) => {
-    const regExp = new RegExp(`src/templates/pages/`)
-    const key = file.replace(regExp, '').replace(/\.ejs/, '')
-    entries[key] = `./${file}`
-  })
+  }
+}).map((file) => {
+  const regExp = new RegExp(`src/templates/pages/`)
+  const key = file.replace(regExp, '').replace(/\.ejs/, '')
+  entries[key] = `./${file}`
+})
 
-if (glob.sync(SRC_IMAGE_DIR).length > 0) {
+if (globSync(SRC_IMAGE_DIR).length > 0) {
   plugins.push(
     new CopyPlugin({
       patterns: [
         {
           from: SRC_IMAGE_DIR,
-          context: path.resolve(__dirname, 'src', 'assets/images'),
-          to: path.resolve(__dirname, OUTPUT_DIR, `assets/images`)
+          context: path.resolve(path.dirname(''), 'src', 'assets/images'),
+          to: path.resolve(path.dirname(''), OUTPUT_DIR, `assets/images`)
         }
       ]
     })
   )
 }
 
-if (glob.sync(FAVICON_FILE_PATH)) {
+if (globSync(FAVICON_FILE_PATH)) {
   plugins.push(
     new CopyPlugin({
       patterns: [
         {
           from: FAVICON_FILE_PATH,
-          context: path.resolve(__dirname, 'src', 'assets'),
-          to: path.resolve(__dirname, OUTPUT_DIR)
+          context: path.resolve(path.dirname(''), 'src', 'assets'),
+          to: path.resolve(path.dirname(''), OUTPUT_DIR)
         }
       ]
     })
   )
 }
 
-module.exports = {
+export default {
   entry: entries,
   mode: modeValue,
   output: {
-    path: path.resolve(__dirname, OUTPUT_DIR),
+    path: path.resolve(path.dirname(''), OUTPUT_DIR),
     clean: true
   },
   devtool: !isProd ? 'inline-source-map' : false,
   devServer: {
     static: {
-      directory: path.join(__dirname, OUTPUT_DIR)
+      directory: path.join(path.dirname(''), OUTPUT_DIR)
     },
     watchFiles: {
       paths: ['./src/**/*']
     },
     port: PORT,
-    hot: true
+    hot: true,
+    open: true
   },
   watchOptions: {
     ignored: '**/node_modules'
@@ -149,7 +146,7 @@ module.exports = {
         test: /\.ejs$/i,
         use: [
           {
-            loader: path.resolve(__dirname, 'webpack-extensions/ejs-loader/index.js')
+            loader: path.resolve(path.dirname(''), 'webpack-extensions/ejs-loader/cjs.js')
           }
         ],
         exclude: /node_modules/
@@ -180,7 +177,7 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js'],
     alias: {
-      '@': path.resolve(__dirname, 'src')
+      '@': path.resolve(path.dirname(''), 'src')
     }
   }
 }
