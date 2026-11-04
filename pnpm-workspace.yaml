@@ -5,3 +5,5 @@ allowBuilds:
   esbuild: false
   unrs-resolver: set this to true or false
   unrs-resolver@1.12.2: true
+overrides:
+  'launch-editor>shell-quote': '1.11.0'
