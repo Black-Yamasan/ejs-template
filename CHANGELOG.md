@@ -1,3 +1,8 @@
+## ver 18.0.5
+
+- webpack-dev-serverのバージョンを更新
+- launch-editor>shell-quoteのバージョンを固定
+
 ## ver 18.0.4
 
 - Node.jsのバージョンを24.22.1に更新
